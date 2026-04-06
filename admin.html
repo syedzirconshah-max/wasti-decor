@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wasti Decor — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A84C;--black:#0A0A0A;--dark:#111;--dark2:#1a1a1a;--dark3:#222;--white:#F5F0E8;--gray:#888}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--dark);color:var(--white);font-family:'Rajdhani',sans-serif;min-height:100vh}
+.admin-header{background:var(--black);border-bottom:2px solid var(--gold);padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
+.admin-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--gold)}
+.admin-badge{padding:6px 16px;background:rgba(201,168,76,.15);border:1px solid var(--gold);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.admin-nav{background:var(--black);padding:0 40px;display:flex;gap:0;border-bottom:1px solid rgba(201,168,76,.15)}
+.nav-tab{padding:14px 24px;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;color:var(--gray);border:none;background:transparent;border-bottom:2px solid transparent;transition:all .3s}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.admin-body{padding:36px 40px;max-width:1200px;margin:0 auto}
+/* PANELS */
+.panel{display:none}.panel.active{display:block}
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px}
+.stat-box{background:var(--dark2);border:1px solid rgba(201,168,76,.15);padding:24px;text-align:center;transition:all .3s}
+.stat-box:hover{border-color:var(--gold)}
+.stat-box .num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold)}
+.stat-box .lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-top:6px}
+/* FORM */
+.form-section{background:var(--dark2);border:1px solid rgba(201,168,76,.15);padding:32px;margin-bottom:24px}
+.form-section h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.f-grp{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.f-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.f-in,.f-sel,.f-ta{background:var(--dark3);border:1px solid rgba(201,168,76,.2);padding:12px 16px;color:var(--white);font-family:'Rajdhani',sans-serif;font-size:15px;outline:none;transition:border-color .3s;width:100%;resize:vertical}
+.f-in:focus,.f-sel:focus,.f-ta:focus{border-color:var(--gold)}
+.f-in::placeholder,.f-ta::placeholder{color:var(--gray)}
+/* BUTTONS */
+.btn{padding:13px 28px;font-family:'Rajdhani',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;border:none;transition:all .3s}
+.btn-gold{background:var(--gold);color:var(--black)}.btn-gold:hover{background:#E8C97A}
+.btn-outline{background:transparent;border:1px solid rgba(201,168,76,.4);color:var(--gold)}.btn-outline:hover{background:rgba(201,168,76,.1)}
+.btn-green{background:#22c55e;color:#fff}.btn-green:hover{background:#16a34a}
+.btn-red{background:#ef4444;color:#fff}.btn-red:hover{background:#dc2626}
+.btn-purple{background:#8b5cf6;color:#fff}.btn-purple:hover{background:#7c3aed}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+/* AI GENERATOR */
+.ai-box{background:var(--dark3);border:1px solid rgba(201,168,76,.2);border-left:3px solid var(--gold);padding:20px;margin-bottom:16px}
+.ai-box h4{color:var(--gold);font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.ai-topics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.ai-topic{padding:7px 14px;border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:11px;letter-spacing:1px;cursor:pointer;transition:all .2s;background:transparent}
+.ai-topic:hover,.ai-topic.selected{background:var(--gold);color:var(--black);border-color:var(--gold)}
+/* POSTS LIST */
+.post-list{display:flex;flex-direction:column;gap:3px}
+.post-item{background:var(--dark2);padding:18px 24px;display:flex;align-items:center;gap:20px;border:1px solid rgba(201,168,76,.08);transition:all .3s}
+.post-item:hover{border-color:rgba(201,168,76,.3)}
+.post-img{width:80px;height:60px;object-fit:cover;flex-shrink:0;background:var(--dark3);display:flex;align-items:center;justify-content:center;font-size:24px}
+.post-img img{width:100%;height:100%;object-fit:cover}
+.post-info{flex:1}
+.post-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:4px}
+.post-meta{font-size:11px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;display:flex;gap:12px;flex-wrap:wrap}
+.post-cat{color:var(--gold)}
+.post-actions{display:flex;gap:8px;flex-shrink:0}
+.act-btn{padding:6px 14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border:none;font-family:'Rajdhani',sans-serif;font-weight:600;transition:all .3s}
+/* STATUS */
+.status-bar{background:var(--dark3);border:1px solid rgba(201,168,76,.2);padding:14px 20px;margin-bottom:16px;font-size:14px;display:flex;align-items:center;gap:10px;display:none}
+.status-bar.show{display:flex}
+.status-bar.success{border-color:#22c55e;color:#22c55e}
+.status-bar.loading{border-color:var(--gold);color:var(--gold)}
+.status-bar.error{border-color:#ef4444;color:#ef4444}
+/* SETTINGS */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.setting-box{background:var(--dark2);border:1px solid rgba(201,168,76,.15);padding:24px}
+.setting-box h4{color:var(--gold);font-size:12px;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px}
+/* PROGRESS */
+.progress-bar{width:100%;height:4px;background:var(--dark3);margin-top:12px;overflow:hidden;display:none}
+.progress-fill{height:100%;background:var(--gold);animation:progress-anim 3s ease forwards}
+@keyframes progress-anim{from{width:0}to{width:100%}}
+.progress-bar.show{display:block}
+/* TOGGLE */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(201,168,76,.08)}
+.toggle{width:46px;height:24px;background:var(--dark3);border:1px solid rgba(201,168,76,.3);border-radius:12px;cursor:pointer;position:relative;transition:background .3s}
+.toggle.on{background:var(--gold)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:var(--white);border-radius:50%;transition:left .3s}
+.toggle.on::after{left:25px}
+.tag{padding:3px 10px;font-size:10px;letter-spacing:2px;text-transform:uppercase;border-radius:2px}
+.tag-green{background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.3)}
+.tag-gold{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.3)}
+.tag-gray{background:rgba(136,136,128,.1);color:var(--gray);border:1px solid rgba(136,136,128,.2)}
+@media(max-width:768px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .f-row{grid-template-columns:1fr}
+  .settings-grid{grid-template-columns:1fr}
+  .admin-body{padding:24px 20px}
+  .admin-header{padding:16px 20px}
+  .admin-nav{padding:0 20px;overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="admin-header">
+  <div class="admin-logo">🏠 WASTI DECOR — Admin Panel</div>
+  <div style="display:flex;gap:12px;align-items:center">
+    <span class="admin-badge">Kamran Haider Wasti</span>
+    <a href="index.html" target="_blank" class="btn btn-outline" style="text-decoration:none;font-size:11px">View Website ↗</a>
+  </div>
+</div>
+
+<div class="admin-nav">
+  <button class="nav-tab active" onclick="showTab('dashboard',this)">📊 Dashboard</button>
+  <button class="nav-tab" onclick="showTab('newpost',this)">✍️ New Post</button>
+  <button class="nav-tab" onclick="showTab('aigenerate',this)">🤖 AI Generate</button>
+  <button class="nav-tab" onclick="showTab('allposts',this)">📋 All Posts</button>
+  <button class="nav-tab" onclick="showTab('settings',this)">⚙️ Settings</button>
+</div>
+
+<div class="admin-body">
+
+  <!-- STATUS BAR -->
+  <div class="status-bar" id="statusBar"></div>
+
+  <!-- DASHBOARD -->
+  <div class="panel active" id="tab-dashboard">
+    <div class="stats-row">
+      <div class="stat-box"><div class="num" id="totalPostsNum">0</div><div class="lbl">Total Posts</div></div>
+      <div class="stat-box"><div class="num" id="aiPostsNum">0</div><div class="lbl">AI Generated</div></div>
+      <div class="stat-box"><div class="num" id="commentsNum">0</div><div class="lbl">Comments</div></div>
+      <div class="stat-box"><div class="num">24/7</div><div class="lbl">AI Active</div></div>
+    </div>
+    <div class="form-section">
+      <h3>⚡ Quick Actions</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+        <button class="btn btn-purple" onclick="showTab('aigenerate',document.querySelector('[onclick*=aigenerate]'))">🤖 Generate AI Post</button>
+        <button class="btn btn-gold" onclick="showTab('newpost',document.querySelector('[onclick*=newpost]'))">✍️ Write Manual Post</button>
+        <button class="btn btn-green" onclick="autoGenerateNow()">⚡ Auto-Generate Now</button>
+      </div>
+    </div>
+    <div class="form-section">
+      <h3>📰 Recent Posts</h3>
+      <div class="post-list" id="dashRecentPosts"></div>
+    </div>
+    <div class="form-section">
+      <h3>📊 Auto-Post Schedule</h3>
+      <div class="toggle-row">
+        <div><div style="font-size:15px;margin-bottom:4px">Daily AI Posts (2-3 per day)</div><div style="color:var(--gray);font-size:13px">Auto-generate interior decor posts every day</div></div>
+        <div class="toggle on" id="scheduleToggle" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="toggle-row">
+        <div><div style="font-size:15px;margin-bottom:4px">Auto Blogspot Cross-Post</div><div style="color:var(--gray);font-size:13px">Post short summary to Blogspot with "Read More" link</div></div>
+        <div class="toggle on" id="blogspotToggle" onclick="this.classList.toggle('on')"></div>
+      </div>
+      <div class="toggle-row">
+        <div><div style="font-size:15px;margin-bottom:4px">WhatsApp Notification</div><div style="color:var(--gray);font-size:13px">Alert when new post is published</div></div>
+        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW POST -->
+  <div class="panel" id="tab-newpost">
+    <div class="form-section">
+      <h3>✍️ Write New Blog Post</h3>
+      <div class="f-row">
+        <div class="f-grp"><label class="f-label">Post Title (English)</label><input type="text" class="f-in" id="pTitle" placeholder="e.g. Top 10 Living Room Ideas 2025"></div>
+        <div class="f-grp"><label class="f-label">Post Title (Roman Urdu)</label><input type="text" class="f-in" id="pTitleUr" placeholder="e.g. 2025 ki Top 10 Drawing Room Ideas"></div>
+      </div>
+      <div class="f-row">
+        <div class="f-grp"><label class="f-label">Category</label>
+          <select class="f-sel" id="pCat">
+            <option value="interior">Interior Design</option>
+            <option value="architecture">Architecture</option>
+            <option value="islamic">Islamic Design</option>
+            <option value="tips">Design Tips</option>
+            <option value="3d">3D Visualization</option>
+            <option value="virtual">Virtual Tours</option>
+          </select>
+        </div>
+        <div class="f-grp"><label class="f-label">Photo URL (from Google Drive / Blog)</label><input type="text" class="f-in" id="pImg" placeholder="https://..."></div>
+      </div>
+      <div class="f-grp"><label class="f-label">Short Excerpt (English)</label><textarea class="f-ta" id="pExcerpt" rows="2" placeholder="Short description shown in blog list..."></textarea></div>
+      <div class="f-grp"><label class="f-label">Short Excerpt (Roman Urdu)</label><textarea class="f-ta" id="pExcerptUr" rows="2" placeholder="Roman Urdu mein mukhtasar tafseel..."></textarea></div>
+      <div class="f-grp"><label class="f-label">Full Post Content (HTML allowed)</label><textarea class="f-ta" id="pContent" rows="12" placeholder="Write full blog post here...&#10;&#10;You can use HTML:&#10;&lt;h2&gt;Section Title&lt;/h2&gt;&#10;&lt;p&gt;Paragraph text...&lt;/p&gt;"></textarea></div>
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="publishPost()">🚀 Publish to Website</button>
+        <button class="btn btn-green" onclick="crossPostBlogspot()">📝 Also Post to Blogspot</button>
+        <button class="btn btn-outline" onclick="previewPost()">👁️ Preview</button>
+        <button class="btn btn-outline" onclick="clearForm()">🗑️ Clear</button>
+      </div>
+      <div class="progress-bar" id="publishProgress"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- AI GENERATE -->
+  <div class="panel" id="tab-aigenerate">
+    <div class="form-section">
+      <h3>🤖 AI Blog Generator</h3>
+      <p style="color:var(--gray);font-size:14px;margin-bottom:20px">AI automatically writes a complete SEO-optimized blog post. Select a topic or let AI choose trending one.</p>
+
+      <div class="ai-box">
+        <h4>📌 Select Topic (or AI will choose trending)</h4>
+        <div class="ai-topics">
+          <div class="ai-topic" onclick="selectTopic(this,'living room design pakistan 2025')">Living Room Trends</div>
+          <div class="ai-topic" onclick="selectTopic(this,'5 marla house design lahore')">5 Marla House Design</div>
+          <div class="ai-topic" onclick="selectTopic(this,'luxury bedroom interior pakistan')">Luxury Bedroom</div>
+          <div class="ai-topic" onclick="selectTopic(this,'kitchen interior design pakistan')">Kitchen Design</div>
+          <div class="ai-topic" onclick="selectTopic(this,'islamic architecture modern home')">Islamic Architecture</div>
+          <div class="ai-topic" onclick="selectTopic(this,'front elevation design pakistan')">Front Elevation</div>
+          <div class="ai-topic" onclick="selectTopic(this,'bathroom interior design pakistan')">Bathroom Design</div>
+          <div class="ai-topic" onclick="selectTopic(this,'home office interior design')">Home Office</div>
+          <div class="ai-topic" onclick="selectTopic(this,'color scheme interior pakistan')">Color Schemes</div>
+          <div class="ai-topic" onclick="selectTopic(this,'3d visualization architecture')">3D Visualization</div>
+          <div class="ai-topic" onclick="selectTopic(this,'small apartment design pakistan')">Small Apartment</div>
+          <div class="ai-topic" onclick="selectTopic(this,'masjid interior design')">Masjid Design</div>
+        </div>
+        <div class="f-row">
+          <div class="f-grp"><label class="f-label">Language Style</label>
+            <select class="f-sel" id="aiLang">
+              <option value="english">English (International SEO)</option>
+              <option value="roman_urdu">Roman Urdu (Pakistani Audience)</option>
+              <option value="both">Both Languages</option>
+            </select>
+          </div>
+          <div class="f-grp"><label class="f-label">Post Length</label>
+            <select class="f-sel" id="aiLength">
+              <option value="medium">Medium (600-800 words)</option>
+              <option value="long">Long (1000-1200 words) — Better SEO</option>
+              <option value="short">Short (300-400 words)</option>
+            </select>
+          </div>
+        </div>
+        <div class="f-grp"><label class="f-label">Photo URL (from your Google Drive)</label>
+          <input type="text" class="f-in" id="aiImg" placeholder="Paste Google Drive direct image link here...">
+          <span style="color:var(--gray);font-size:12px;margin-top:4px;display:block">💡 Tip: Right-click photo in Drive → Share → Copy link → paste here</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-purple" onclick="generateAIPost()">🤖 Generate with AI</button>
+        <button class="btn btn-gold" onclick="generateAndPublish()">⚡ Generate & Publish Instantly</button>
+        <button class="btn btn-outline" onclick="generateBlogspotVersion()">📝 Generate for Blogspot</button>
+      </div>
+      <div class="progress-bar" id="aiProgress"><div class="progress-fill"></div></div>
+    </div>
+
+    <div class="form-section" id="aiResult" style="display:none">
+      <h3>✅ AI Generated Post — Review & Edit</h3>
+      <div class="f-row">
+        <div class="f-grp"><label class="f-label">Title (English)</label><input type="text" class="f-in" id="aiTitle" placeholder="AI will fill this..."></div>
+        <div class="f-grp"><label class="f-label">Title (Roman Urdu)</label><input type="text" class="f-in" id="aiTitleUr" placeholder="AI will fill this..."></div>
+      </div>
+      <div class="f-grp"><label class="f-label">Excerpt</label><textarea class="f-ta" id="aiExcerpt" rows="2"></textarea></div>
+      <div class="f-grp"><label class="f-label">Full Content</label><textarea class="f-ta" id="aiContent" rows="14"></textarea></div>
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="publishAIPost()">🚀 Publish to Website</button>
+        <button class="btn btn-green" onclick="crossPostAIBlogspot()">📝 Also Post Short to Blogspot</button>
+        <button class="btn btn-outline" onclick="document.getElementById('aiResult').style.display='none'">✕ Discard</button>
+      </div>
+    </div>
+
+    <!-- Blogspot Template -->
+    <div class="form-section">
+      <h3>📋 Blogspot Short Post Template</h3>
+      <p style="color:var(--gray);font-size:14px;margin-bottom:16px">When you publish a post, Blogspot gets a short version with "Read Full Post" link to bring traffic to your main website.</p>
+      <div class="ai-box">
+        <h4>Blogspot Post Format:</h4>
+        <pre style="color:rgba(245,240,232,.7);font-size:13px;line-height:1.8;white-space:pre-wrap">[Post Title]
+
+[First 2-3 sentences of the post...]
+
+🔗 Read Full Post with Photos: [Your Website URL]/#blog
+
+---
+Wasti Interior Decor | Kamran Haider Wasti
+📍 Johar Town, Lahore
+📱 WhatsApp: +92 302 507 4727
+🌐 Website: [Your Website URL]</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALL POSTS -->
+  <div class="panel" id="tab-allposts">
+    <div class="form-section">
+      <h3>📋 All Published Posts</h3>
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+        <button class="btn btn-outline" style="font-size:11px" onclick="filterPosts('all')">All</button>
+        <button class="btn btn-outline" style="font-size:11px" onclick="filterPosts('interior')">Interior</button>
+        <button class="btn btn-outline" style="font-size:11px" onclick="filterPosts('architecture')">Architecture</button>
+        <button class="btn btn-outline" style="font-size:11px" onclick="filterPosts('islamic')">Islamic</button>
+        <button class="btn btn-outline" style="font-size:11px" onclick="filterPosts('ai')">AI Generated</button>
+      </div>
+      <div class="post-list" id="allPostsList"></div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="panel" id="tab-settings">
+    <div class="settings-grid">
+      <div class="setting-box">
+        <h4>🌐 Website Settings</h4>
+        <div class="f-grp"><label class="f-label">Website URL</label><input type="text" class="f-in" value="https://wastidecor.netlify.app" placeholder="Your website URL"></div>
+        <div class="f-grp"><label class="f-label">Blogspot URL</label><input type="text" class="f-in" value="https://wastidecor.blogspot.com"></div>
+        <button class="btn btn-gold" style="margin-top:8px" onclick="showStatus('Settings saved!','success')">Save Settings</button>
+      </div>
+      <div class="setting-box">
+        <h4>💬 WhatsApp Settings</h4>
+        <div class="f-grp"><label class="f-label">Primary WhatsApp</label><input type="text" class="f-in" value="+92 302 507 4727"></div>
+        <div class="f-grp"><label class="f-label">Secondary WhatsApp</label><input type="text" class="f-in" value="+92 345 671 0694"></div>
+        <button class="btn btn-green" style="margin-top:8px" onclick="showStatus('WhatsApp settings saved!','success')">Save</button>
+      </div>
+      <div class="setting-box">
+        <h4>🤖 AI Auto-Post Schedule</h4>
+        <div class="toggle-row"><span>Enable Auto-Posting</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="toggle-row"><span>Posts per day: <strong style="color:var(--gold)">2</strong></span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="toggle-row"><span>Cross-post to Blogspot</span><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="f-grp" style="margin-top:16px"><label class="f-label">Post Time 1</label><input type="time" class="f-in" value="09:00"></div>
+        <div class="f-grp"><label class="f-label">Post Time 2</label><input type="time" class="f-in" value="17:00"></div>
+        <button class="btn btn-purple" style="margin-top:8px" onclick="showStatus('Schedule saved!','success')">Save Schedule</button>
+      </div>
+      <div class="setting-box">
+        <h4>📸 Google Drive Photos</h4>
+        <p style="color:var(--gray);font-size:13px;margin-bottom:16px">Connect your Google Drive folder for AI to pick photos automatically.</p>
+        <div class="f-grp"><label class="f-label">Drive Folder Link</label><input type="text" class="f-in" value="https://drive.google.com/drive/folders/1AEKYQEcKzAiRLTI106qsCx3tnVzjoMqL" placeholder="Google Drive folder URL"></div>
+        <div class="f-grp"><label class="f-label">How to get photo URL:</label>
+          <div style="background:var(--dark);padding:12px;font-size:12px;color:var(--gray);line-height:1.8">
+            1. Open Google Drive<br>
+            2. Right-click on photo<br>
+            3. Click "Share" → "Anyone with link"<br>
+            4. Copy link<br>
+            5. Replace <code style="color:var(--gold)">/view</code> with <code style="color:var(--gold)">/uc?export=view&id=</code>
+          </div>
+        </div>
+        <button class="btn btn-outline" onclick="showStatus('Drive connected!','success')">Connect Drive</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /admin-body -->
+
+<script>
+// ========== POSTS STORAGE ==========
+const DEFAULT_POSTS = [
+  {id:1,cat:'interior',catLabel:'Interior Design',title:'Top 10 Living Room Design Trends in Pakistan 2025',titleUr:'Pakistan mein 2025 ki Top 10 Drawing Room Designs',excerpt:'Discover the hottest interior design trends...',excerptUr:'Pakistan ke gharoon mein trending designs...',img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTBtaw5dps12RSksDbCrp3pCneim7_aHkFrR8-s-XRTuSoi9U7fAt5JwghPjmWhpsSITHYlK3frdM496fIPgYOVMwZvxDDyjPXITBMAtnhk9xlYjyHCR2Kdy75ODGH4VxpEIM6eLUEgEkNmr7KYQDWgQLP7ms7QReofapGYqjiJXT23wLVVP4KmfTdlBa0/s797/Wasti%20Decor%201%20(20).jpeg',date:'Apr 5, 2025',ai:true,content:'<p>Full content here...</p>'},
+  {id:2,cat:'architecture',catLabel:'Architecture',title:'5 Marla House Design Ideas for Lahore Families',titleUr:'Lahore Families ke liye 5 Marla Ghar ke Best Designs',excerpt:'Smart space planning solutions...',excerptUr:'5 marla plot ke liye smart design ideas...',img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzsaTp9my9aZJgBW_Z6eIjTZP2O_AiSa2G96jdmLDfi9wAtuAMelq6TA4ydAwNx91SAXx5w-iRBKRR_UQj_RL94DAptLdon6baMCDVFDVdiuZtGVxrV7ub8VjSg2FuWjMrNv1U2dEVr2OFfxtHRYE3PLdUMcODkwTPkAtr9gZw0XLcwq0cbnBkD4rFz7ME/s1200/New-home-space-Planning.png',date:'Apr 4, 2025',ai:true,content:'<p>Full content here...</p>'},
+  {id:3,cat:'islamic',catLabel:'Islamic Design',title:'Incorporating Islamic Patterns in Modern Home Decor',titleUr:'Modern Ghar mein Islami Design',excerpt:'Blend traditional Islamic artistry...',excerptUr:'Aadhunik design mein Islami art...',img:'',date:'Apr 3, 2025',ai:false,content:'<p>Full content here...</p>'}
+];
+
+function getPosts() { try { return JSON.parse(localStorage.getItem('wasti_posts')||'null') || DEFAULT_POSTS; } catch { return DEFAULT_POSTS; } }
+function savePosts(posts) { localStorage.setItem('wasti_posts', JSON.stringify(posts)); }
+
+// ========== TABS ==========
+function showTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id==='dashboard') renderDashboard();
+  if(id==='allposts') renderAllPosts('all');
+}
+
+// ========== STATUS ==========
+function showStatus(msg, type='loading') {
+  const bar = document.getElementById('statusBar');
+  bar.textContent = (type==='success'?'✅ ':type==='error'?'❌ ':'⏳ ') + msg;
+  bar.className = 'status-bar show ' + type;
+  if(type==='success') setTimeout(()=>bar.classList.remove('show'),4000);
+}
+
+// ========== DASHBOARD ==========
+function renderDashboard() {
+  const posts = getPosts();
+  document.getElementById('totalPostsNum').textContent = posts.length;
+  document.getElementById('aiPostsNum').textContent = posts.filter(p=>p.ai).length;
+  let totalComments = 0;
+  posts.forEach(p=>{ try { totalComments += JSON.parse(localStorage.getItem('comments_'+p.id)||'[]').length; } catch{} });
+  document.getElementById('commentsNum').textContent = totalComments;
+  const container = document.getElementById('dashRecentPosts');
+  container.innerHTML = posts.slice(-4).reverse().map(p=>`
+    <div class="post-item">
+      <div class="post-img">${p.img?`<img src="${p.img}" alt="">`:p.cat==='interior'?'🏠':p.cat==='architecture'?'🏗️':'🕌'}</div>
+      <div class="post-info">
+        <div class="post-title">${p.title}</div>
+        <div class="post-meta"><span class="post-cat">${p.catLabel}</span><span>${p.date}</span>${p.ai?'<span class="tag tag-gold">AI</span>':'<span class="tag tag-green">Manual</span>'}</div>
+      </div>
+      <div class="post-actions">
+        <button class="act-btn" style="background:rgba(201,168,76,.15);color:var(--gold)" onclick="editPost(${p.id})">Edit</button>
+        <button class="act-btn" style="background:rgba(239,68,68,.15);color:#ef4444" onclick="deletePost(${p.id})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+// ========== ALL POSTS ==========
+function renderAllPosts(filter) {
+  const posts = getPosts();
+  const filtered = filter==='all' ? posts : filter==='ai' ? posts.filter(p=>p.ai) : posts.filter(p=>p.cat===filter);
+  document.getElementById('allPostsList').innerHTML = filtered.map(p=>`
+    <div class="post-item">
+      <div class="post-img">${p.img?`<img src="${p.img}" alt="">`:p.cat==='interior'?'🏠':p.cat==='architecture'?'🏗️':'🕌'}</div>
+      <div class="post-info">
+        <div class="post-title">${p.title}</div>
+        <div class="post-meta"><span class="post-cat">${p.catLabel}</span><span>${p.date}</span>${p.ai?'<span class="tag tag-gold">AI Generated</span>':'<span class="tag tag-green">Manual</span>'}</div>
+      </div>
+      <div class="post-actions">
+        <button class="act-btn" style="background:rgba(34,197,94,.15);color:#22c55e" onclick="crossPostSingle(${p.id})">→ Blogspot</button>
+        <button class="act-btn" style="background:rgba(201,168,76,.15);color:var(--gold)" onclick="editPost(${p.id})">Edit</button>
+        <button class="act-btn" style="background:rgba(239,68,68,.15);color:#ef4444" onclick="deletePost(${p.id})">Delete</button>
+      </div>
+    </div>`).join('') || '<p style="color:var(--gray);padding:20px">No posts found.</p>';
+}
+function filterPosts(f) { renderAllPosts(f); }
+
+// ========== PUBLISH POST ==========
+function publishPost() {
+  const title = document.getElementById('pTitle').value.trim();
+  const titleUr = document.getElementById('pTitleUr').value.trim();
+  const cat = document.getElementById('pCat').value;
+  const img = document.getElementById('pImg').value.trim();
+  const excerpt = document.getElementById('pExcerpt').value.trim();
+  const excerptUr = document.getElementById('pExcerptUr').value.trim();
+  const content = document.getElementById('pContent').value.trim();
+  if(!title||!content){showStatus('Please fill Title and Content!','error');return;}
+  const progress = document.getElementById('publishProgress');
+  progress.classList.add('show');
+  showStatus('Publishing post to website...','loading');
+  setTimeout(()=>{
+    const posts = getPosts();
+    const catLabels = {interior:'Interior Design',architecture:'Architecture',islamic:'Islamic Design',tips:'Design Tips','3d':'3D Visualization',virtual:'Virtual Tours'};
+    const newPost = {
+      id: Date.now(),
+      cat, catLabel: catLabels[cat]||cat,
+      title, titleUr: titleUr||title,
+      excerpt: excerpt||title, excerptUr: excerptUr||titleUr||title,
+      img, date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}),
+      ai: false, content
+    };
+    posts.push(newPost);
+    savePosts(posts);
+    progress.classList.remove('show');
+    showStatus('Post published successfully! ✅','success');
+    clearForm();
+    renderDashboard();
+  }, 2000);
+}
+
+function clearForm() {
+  ['pTitle','pTitleUr','pImg','pExcerpt','pExcerptUr','pContent'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+}
+
+// ========== AI GENERATE ==========
+let selectedTopic = '';
+function selectTopic(el, topic) {
+  document.querySelectorAll('.ai-topic').forEach(t=>t.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedTopic = topic;
+}
+
+async function generateAIPost() {
+  const progress = document.getElementById('aiProgress');
+  progress.classList.add('show');
+  showStatus('AI is writing your blog post...','loading');
+  const topic = selectedTopic || 'latest interior design trends pakistan';
+  const lang = document.getElementById('aiLang').value;
+  const length = document.getElementById('aiLength').value;
+  const wordCount = length==='long'?'1000-1200':length==='short'?'300-400':'600-800';
+
+  const prompt = `Write a professional SEO-optimized blog post for Wasti Interior Decor (wastidecor.com) about: "${topic}".
+
+REQUIREMENTS:
+- Target audience: Pakistan + International
+- Word count: ${wordCount} words
+- Language: ${lang==='roman_urdu'?'Roman Urdu (Urdu written in English letters)':lang==='both'?'English with some Roman Urdu phrases':'English'}
+- Include relevant keywords for Google SEO
+- Author: Kamran Haider Wasti, Architect & Interior Designer, Lahore Pakistan
+
+FORMAT (respond ONLY in this JSON, no extra text):
+{
+  "title": "English title here",
+  "titleUr": "Roman Urdu title here",
+  "excerpt": "Short 1-2 sentence English excerpt",
+  "excerptUr": "Short Roman Urdu excerpt",
+  "cat": "interior OR architecture OR islamic OR tips",
+  "content": "Full HTML blog post content with <h2> headings and <p> paragraphs"
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:2000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data = await res.json();
+    const raw = data.content?.[0]?.text||'{}';
+    const clean = raw.replace(/```json|```/g,'').trim();
+    const post = JSON.parse(clean);
+    progress.classList.remove('show');
+    document.getElementById('aiResult').style.display='block';
+    document.getElementById('aiTitle').value = post.title||'';
+    document.getElementById('aiTitleUr').value = post.titleUr||'';
+    document.getElementById('aiExcerpt').value = post.excerpt||'';
+    document.getElementById('aiContent').value = post.content||'';
+    showStatus('AI post generated! Review and publish.','success');
+  } catch(e) {
+    progress.classList.remove('show');
+    showStatus('AI error. Please try again.','error');
+  }
+}
+
+async function generateAndPublish() {
+  await generateAIPost();
+  setTimeout(()=>publishAIPost(), 500);
+}
+
+function publishAIPost() {
+  const title = document.getElementById('aiTitle').value.trim();
+  const titleUr = document.getElementById('aiTitleUr').value.trim();
+  const excerpt = document.getElementById('aiExcerpt').value.trim();
+  const content = document.getElementById('aiContent').value.trim();
+  const img = document.getElementById('aiImg').value.trim();
+  if(!title||!content){showStatus('Please generate content first!','error');return;}
+  showStatus('Publishing AI post...','loading');
+  setTimeout(()=>{
+    const posts = getPosts();
+    posts.push({
+      id:Date.now(), cat:'interior', catLabel:'Interior Design',
+      title, titleUr: titleUr||title,
+      excerpt: excerpt||title, excerptUr: excerpt||title,
+      img, date:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}),
+      ai:true, content
+    });
+    savePosts(posts);
+    document.getElementById('aiResult').style.display='none';
+    showStatus('AI post published! 🎉','success');
+    renderDashboard();
+  }, 1500);
+}
+
+// ========== BLOGSPOT CROSS-POST ==========
+function crossPostBlogspot() {
+  const title = document.getElementById('pTitle').value||'New Post';
+  const excerpt = document.getElementById('pExcerpt').value||'';
+  const websiteUrl = 'https://wastidecor.netlify.app';
+  const bsContent = `${title}\n\n${excerpt}\n\n🔗 Read Full Post: ${websiteUrl}/#blog\n\n---\nWasti Interior Decor | Kamran Haider Wasti\n📍 Johar Town, Lahore\n📱 WhatsApp: +92 302 507 4727\n🌐 ${websiteUrl}`;
+  const whatsappMsg = `*New Blog Post Published!*\n\n*Title:* ${title}\n\n${excerpt}\n\n🔗 Full post: ${websiteUrl}/#blog\n\nBlogspot short version ready to paste:\n\n${bsContent}`;
+  window.open(`https://wa.me/923025074727?text=${encodeURIComponent(whatsappMsg)}`,'_blank');
+  showStatus('Blogspot version sent to WhatsApp! Paste it in Blogspot.','success');
+}
+
+function crossPostAIBlogspot() {
+  const title = document.getElementById('aiTitle').value||'New AI Post';
+  const excerpt = document.getElementById('aiExcerpt').value||'';
+  const websiteUrl = 'https://wastidecor.netlify.app';
+  const bsContent = `${title}\n\n${excerpt}\n\n🔗 Read Full Post with Photos: ${websiteUrl}/#blog\n\n---\nWasti Interior Decor | Kamran Haider Wasti\n📍 Johar Town, Lahore, Pakistan\n📱 WhatsApp: +92 302 507 4727\n🌐 ${websiteUrl}`;
+  const msg = `*New AI Blog Post!*\n\nTitle: ${title}\n\nBlogspot short version (paste this):\n\n${bsContent}`;
+  window.open(`https://wa.me/923025074727?text=${encodeURIComponent(msg)}`,'_blank');
+  showStatus('Short version sent to WhatsApp for Blogspot!','success');
+}
+
+function crossPostSingle(id) {
+  const posts = getPosts();
+  const p = posts.find(x=>x.id===id);
+  if(!p) return;
+  const websiteUrl = 'https://wastidecor.netlify.app';
+  const msg = `*Blogspot Short Post — Paste this:*\n\n${p.title}\n\n${p.excerpt}\n\n🔗 Read Full Post: ${websiteUrl}/#blog\n\n---\nWasti Interior Decor | Kamran Haider Wasti\n📍 Johar Town, Lahore\n📱 +92 302 507 4727`;
+  window.open(`https://wa.me/923025074727?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// ========== EDIT / DELETE ==========
+function editPost(id) {
+  const posts = getPosts();
+  const p = posts.find(x=>x.id===id);
+  if(!p) return;
+  showTab('newpost', document.querySelector('[onclick*=newpost]'));
+  setTimeout(()=>{
+    document.getElementById('pTitle').value = p.title;
+    document.getElementById('pTitleUr').value = p.titleUr||'';
+    document.getElementById('pExcerpt').value = p.excerpt||'';
+    document.getElementById('pExcerptUr').value = p.excerptUr||'';
+    document.getElementById('pImg').value = p.img||'';
+    document.getElementById('pContent').value = p.content||'';
+    showStatus('Post loaded for editing. Edit and republish.','loading');
+  }, 200);
+}
+
+function deletePost(id) {
+  if(!confirm('Delete this post?')) return;
+  const posts = getPosts().filter(p=>p.id!==id);
+  savePosts(posts);
+  renderDashboard();
+  renderAllPosts('all');
+  showStatus('Post deleted.','success');
+}
+
+function autoGenerateNow() {
+  showTab('aigenerate', document.querySelector('[onclick*=aigenerate]'));
+  setTimeout(generateAIPost, 300);
+}
+
+function generateBlogspotVersion() {
+  const topic = selectedTopic || 'interior design tips pakistan';
+  const msg = `Generate a short 150-word blog post for Blogspot about: ${topic}. For Wasti Interior Decor (Kamran Haider Wasti, Lahore). End with: "Read Full Post: wastidecor.netlify.app/#blog"`;
+  showStatus('Opening WhatsApp with Blogspot version...','loading');
+  window.open(`https://wa.me/923025074727?text=${encodeURIComponent('Generate short Blogspot post:\n\n'+msg)}`,'_blank');
+}
+
+function previewPost() {
+  const title = document.getElementById('pTitle').value;
+  const content = document.getElementById('pContent').value;
+  const w = window.open('','_blank');
+  w.document.write(`<html><head><title>Preview</title><style>body{background:#111;color:#F5F0E8;font-family:Georgia,serif;padding:40px;max-width:800px;margin:0 auto}h1{color:#C9A84C;margin-bottom:20px}h2{color:#C9A84C;margin:24px 0 12px}p{line-height:1.8;margin-bottom:14px}</style></head><body><h1>${title}</h1>${content}</body></html>`);
+}
+
+// ========== INIT ==========
+renderDashboard();
+</script>
+</body>
+</html>

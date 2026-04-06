@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wasti Interior Decor | Luxury Interior & Architecture – Lahore, Pakistan</title>
+<meta name="description" content="Wasti Interior Decor – Premium Interior Design, Architecture, House Maps, 3D Visualization & 720° Virtual Tours by Kamran Haider Wasti. Serving Pakistan & International Clients.">
+<meta name="keywords" content="interior design lahore, house map pakistan, architect lahore, interior decor, wasti decor, kamran wasti, 3d visualization, virtual tour">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#8B6914;
+  --black:#0A0A0A;--dark:#111111;--dark2:#1a1a1a;--dark3:#222222;
+  --white:#F5F0E8;--gray:#888880;
+  --font-display:'Playfair Display',serif;
+  --font-body:'Cormorant Garamond',serif;
+  --font-ui:'Rajdhani',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);font-size:18px;line-height:1.7;overflow-x:hidden;cursor:none}
+.cursor{width:12px;height:12px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:99999;transition:transform .15s ease;mix-blend-mode:difference}
+.cursor-ring{width:40px;height:40px;border:1px solid var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:99998;transition:all .3s ease;opacity:.6}
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--black);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;transition:opacity .6s,visibility .6s}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-logo{font-family:var(--font-display);font-size:42px;color:var(--gold);font-weight:900;animation:float 2s ease-in-out infinite}
+.loader-bar{width:200px;height:1px;background:var(--dark3);overflow:hidden}
+.loader-progress{height:100%;background:var(--gold);animation:loadprogress 2.2s ease forwards}
+.loader-text{font-family:var(--font-ui);font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
+/* LANG */
+.lang-toggle{position:fixed;top:20px;right:80px;z-index:9000;display:flex;border:1px solid var(--gold-dark);overflow:hidden}
+.lang-btn{padding:6px 14px;font-family:var(--font-ui);font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--gray);border:none;transition:all .3s}
+.lang-btn.active{background:var(--gold);color:var(--black)}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:8000;padding:20px 50px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.scrolled{background:rgba(10,10,10,.95);backdrop-filter:blur(20px);padding:14px 50px;border-bottom:1px solid rgba(201,168,76,.2)}
+.nav-logo{font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--gold);letter-spacing:2px;text-decoration:none}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-family:var(--font-ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{padding:9px 22px;border:1px solid var(--gold);color:var(--gold)!important;font-family:var(--font-ui);font-size:12px!important;letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:all .3s!important}
+.nav-cta:hover{background:var(--gold);color:var(--black)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+.hamburger span{display:block;width:26px;height:1px;background:var(--gold);transition:all .3s}
+/* MOBILE MENU */
+.mobile-menu{position:fixed;inset:0;background:rgba(10,10,10,.98);z-index:7999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;opacity:0;pointer-events:none;transition:opacity .4s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--white);text-decoration:none;transition:color .3s}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-close{position:absolute;top:28px;right:28px;font-size:30px;color:var(--gold);cursor:pointer;background:none;border:none}
+/* HERO */
+#hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-slideshow{position:absolute;inset:0;z-index:0;overflow:hidden}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;transform:scale(1.06)}
+.slide.active{opacity:1;transform:scale(1);transition:opacity 1.4s ease,transform 8s ease}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 60%,rgba(10,8,4,.80) 100%);z-index:1}
+.slide-dots{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:10px}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,.3);border:1px solid var(--gold);cursor:pointer;transition:all .3s}
+.dot.active{background:var(--gold);transform:scale(1.5)}
+.slide-counter{position:absolute;bottom:38px;right:50px;z-index:5;font-family:var(--font-ui);font-size:12px;letter-spacing:4px;color:rgba(201,168,76,.7)}
+.slide-prev,.slide-next{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold);width:48px;height:48px;font-size:18px;cursor:pointer;transition:all .3s}
+.slide-prev{left:24px}.slide-next{right:24px}
+.slide-prev:hover,.slide-next:hover{background:var(--gold);color:var(--black)}
+.hero-grid{position:absolute;inset:0;z-index:2;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%)}
+.hero-content{position:relative;z-index:3;max-width:1300px;margin:0 auto;padding:130px 50px 80px;width:100%}
+.hero-tagline{font-family:var(--font-ui);font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:16px;animation:fadeSlideUp .9s ease .3s both}
+.hero-tagline::before{content:'';width:40px;height:1px;background:var(--gold)}
+.hero-title{font-family:var(--font-display);font-size:clamp(56px,7vw,100px);font-weight:900;line-height:1;margin-bottom:10px;animation:fadeSlideUp .9s ease .5s both}
+.hero-title .gold{color:var(--gold)}
+.hero-sub{font-family:var(--font-display);font-size:clamp(22px,3vw,36px);font-style:italic;color:var(--gray);margin-bottom:28px;animation:fadeSlideUp .9s ease .6s both}
+.hero-desc{font-size:17px;color:rgba(245,240,232,.75);max-width:600px;margin-bottom:40px;line-height:1.8;animation:fadeSlideUp .9s ease .7s both}
+.hero-btns{display:flex;gap:18px;flex-wrap:wrap;animation:fadeSlideUp .9s ease .8s both}
+.btn-gold{padding:15px 38px;background:var(--gold);color:var(--black);font-family:var(--font-ui);font-size:13px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;font-weight:600;transition:all .3s;border:none;cursor:pointer}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-outline{padding:15px 38px;border:1px solid rgba(201,168,76,.5);color:var(--gold);font-family:var(--font-ui);font-size:13px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:all .3s}
+.btn-outline:hover{background:rgba(201,168,76,.1);border-color:var(--gold)}
+.hero-stats{display:flex;gap:40px;margin-top:56px;padding-top:36px;border-top:1px solid rgba(201,168,76,.15);animation:fadeSlideUp .9s ease .9s both;flex-wrap:wrap}
+.stat-num{font-family:var(--font-display);font-size:40px;font-weight:700;color:var(--gold);line-height:1;display:block}
+.stat-label{font-family:var(--font-ui);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-top:4px;display:block}
+/* TICKER */
+.ticker{background:var(--gold);padding:13px 0;overflow:hidden;position:relative;z-index:10}
+.ticker-inner{display:flex;animation:ticker 30s linear infinite;white-space:nowrap}
+.ticker-item{font-family:var(--font-ui);font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--black);padding:0 50px;font-weight:600}
+/* SECTION */
+section{padding:100px 50px}
+.section-header{text-align:center;margin-bottom:70px}
+.section-tag{font-family:var(--font-ui);font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:14px}
+.section-tag::before,.section-tag::after{content:'';width:36px;height:1px;background:var(--gold)}
+.section-title{font-family:var(--font-display);font-size:clamp(32px,4vw,54px);font-weight:700;line-height:1.1;margin-bottom:16px}
+.section-sub{font-size:17px;color:rgba(245,240,232,.6);max-width:580px;margin:0 auto}
+/* POLICY */
+#policy{background:var(--dark2);padding:60px 50px;border-top:2px solid var(--gold);border-bottom:1px solid rgba(201,168,76,.2)}
+.policy-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start}
+.policy-flag{font-size:52px;padding-top:4px}
+.policy-tag{font-family:var(--font-ui);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.policy-title{font-family:var(--font-display);font-size:26px;font-weight:700;margin-bottom:18px;line-height:1.3}
+.policy-box{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.2);padding:24px;margin-bottom:14px;font-size:15px;color:rgba(245,240,232,.85);line-height:1.9}
+.policy-chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.policy-chip{display:flex;align-items:center;gap:10px;padding:10px 18px;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);font-size:13px}
+/* SERVICES */
+#services{background:var(--dark)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1300px;margin:0 auto}
+.srv-card{background:var(--dark2);padding:44px 36px;position:relative;overflow:hidden;transition:all .4s;cursor:default}
+.srv-card::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.srv-card:hover{background:var(--dark3);transform:translateY(-4px)}
+.srv-card:hover::before{transform:scaleX(1)}
+.srv-num{font-family:var(--font-display);font-size:70px;font-weight:900;color:rgba(201,168,76,.05);position:absolute;top:16px;right:16px;line-height:1}
+.srv-icon{font-size:44px;margin-bottom:20px;display:block;transition:transform .3s}
+.srv-card:hover .srv-icon{transform:scale(1.12)}
+.srv-title{font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:8px}
+.srv-urdu{font-style:italic;font-size:14px;color:var(--gold);margin-bottom:14px;display:block}
+.srv-desc{font-size:15px;color:rgba(245,240,232,.6);line-height:1.7}
+/* PORTFOLIO */
+#portfolio{background:var(--black)}
+.port-slider{position:relative;overflow:hidden;max-width:1300px;margin:0 auto}
+.port-track{display:flex;transition:transform .7s cubic-bezier(.77,0,.175,1)}
+.port-slide{min-width:calc(33.333% - 2px);margin-right:3px;position:relative;aspect-ratio:4/3;overflow:hidden;flex-shrink:0;cursor:pointer;background:var(--dark2)}
+.port-slide img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .4s;filter:grayscale(15%) brightness(.85);display:block}
+.port-slide:hover img{transform:scale(1.08);filter:grayscale(0%) brightness(1)}
+.port-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,transparent 55%);padding:26px;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;transition:opacity .4s}
+.port-slide:hover .port-overlay{opacity:1}
+.port-cat{font-family:var(--font-ui);font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.port-title{font-family:var(--font-display);font-size:20px;font-weight:700}
+.port-nav{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:28px}
+.port-btn{width:46px;height:46px;border:1px solid rgba(201,168,76,.4);background:transparent;color:var(--gold);font-size:17px;cursor:pointer;transition:all .3s}
+.port-btn:hover{background:var(--gold);color:var(--black)}
+.port-dots-row{display:flex;gap:8px}
+.pdot{width:6px;height:6px;border-radius:50%;background:rgba(201,168,76,.3);cursor:pointer;transition:all .3s}
+.pdot.active{background:var(--gold);transform:scale(1.6)}
+/* BLOG */
+#blog{background:var(--dark)}
+.blog-controls{display:flex;justify-content:space-between;align-items:center;max-width:1300px;margin:0 auto 40px;flex-wrap:gap}
+.blog-filters{display:flex;gap:10px;flex-wrap:wrap}
+.filter-btn{padding:8px 20px;border:1px solid rgba(201,168,76,.3);background:transparent;color:var(--gray);font-family:var(--font-ui);font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.filter-btn.active,.filter-btn:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;max-width:1300px;margin:0 auto}
+.blog-card{background:var(--dark2);overflow:hidden;transition:all .35s;cursor:pointer;display:flex;flex-direction:column}
+.blog-card:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.blog-thumb{aspect-ratio:16/9;background:var(--dark3);overflow:hidden;position:relative}
+.blog-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s;filter:brightness(.85)}
+.blog-card:hover .blog-thumb img{transform:scale(1.06);filter:brightness(1)}
+.blog-thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:54px;opacity:.2}
+.blog-body{padding:26px;flex:1;display:flex;flex-direction:column}
+.blog-cat{font-family:var(--font-ui);font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.blog-cat::before{content:'◆';font-size:6px}
+.blog-title{font-family:var(--font-display);font-size:20px;font-weight:700;line-height:1.3;margin-bottom:10px;color:var(--white);transition:color .3s;flex:1}
+.blog-card:hover .blog-title{color:var(--gold)}
+.blog-excerpt{font-size:14px;color:rgba(245,240,232,.6);line-height:1.7;margin-bottom:18px}
+.blog-meta{display:flex;align-items:center;justify-content:space-between;font-family:var(--font-ui);font-size:10px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;border-top:1px solid rgba(201,168,76,.1);padding-top:14px;margin-top:auto}
+.ai-badge{padding:3px 10px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:9px;letter-spacing:2px}
+.read-more-btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--gold);font-family:var(--font-ui);font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}
+.read-more-btn:hover{border-color:var(--gold)}
+/* BLOG POST MODAL */
+.post-modal{position:fixed;inset:0;z-index:9000;opacity:0;pointer-events:none;transition:opacity .4s;display:flex;align-items:flex-start;justify-content:center;padding:60px 20px;overflow-y:auto}
+.post-modal.open{opacity:1;pointer-events:all}
+.post-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(8px)}
+.post-modal-inner{position:relative;z-index:1;background:var(--dark2);max-width:860px;width:100%;border:1px solid rgba(201,168,76,.2);animation:fadeSlideUp .4s ease}
+.post-modal-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;filter:brightness(.9)}
+.post-modal-body{padding:50px}
+.post-modal-cat{font-family:var(--font-ui);font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.post-modal-title{font-family:var(--font-display);font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.2;margin-bottom:20px}
+.post-modal-meta{display:flex;gap:20px;font-family:var(--font-ui);font-size:11px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid rgba(201,168,76,.15);flex-wrap:wrap}
+.post-modal-content{font-size:17px;line-height:1.9;color:rgba(245,240,232,.85)}
+.post-modal-content p{margin-bottom:18px}
+.post-modal-content h2{font-family:var(--font-display);font-size:24px;color:var(--gold);margin:30px 0 14px}
+.post-modal-close{position:absolute;top:18px;right:18px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--gold);width:40px;height:40px;font-size:18px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center}
+.post-modal-close:hover{background:var(--gold);color:var(--black)}
+.blogspot-link{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:12px 24px;border:1px solid rgba(201,168,76,.3);color:var(--gold);font-family:var(--font-ui);font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .3s}
+.blogspot-link:hover{background:rgba(201,168,76,.1)}
+/* COMMENTS */
+.comments-section{margin-top:40px;padding-top:36px;border-top:1px solid rgba(201,168,76,.15)}
+.comments-title{font-family:var(--font-display);font-size:24px;font-weight:700;margin-bottom:24px}
+.comment-item{background:var(--dark3);padding:20px;margin-bottom:14px;border-left:2px solid rgba(201,168,76,.3)}
+.comment-author{font-family:var(--font-ui);font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.comment-text{font-size:15px;color:rgba(245,240,232,.8);line-height:1.7}
+.comment-form{margin-top:24px}
+.comment-form h4{font-family:var(--font-ui);font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+.c-input,.c-textarea{width:100%;background:var(--dark);border:1px solid rgba(201,168,76,.2);padding:12px 16px;color:var(--white);font-family:var(--font-body);font-size:16px;outline:none;transition:border-color .3s;margin-bottom:12px}
+.c-input:focus,.c-textarea:focus{border-color:var(--gold)}
+.c-input::placeholder,.c-textarea::placeholder{color:var(--gray)}
+/* AI CHAT */
+#ai-section{background:var(--black)}
+.chat-wrap{max-width:860px;margin:0 auto}
+.chat-win{background:var(--dark2);border:1px solid rgba(201,168,76,.2);overflow:hidden}
+.chat-hdr{background:var(--gold);padding:18px 26px;display:flex;align-items:center;gap:14px}
+.chat-hdr-av{width:42px;height:42px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px}
+.chat-hdr h3{font-family:var(--font-display);font-size:18px;color:var(--black);font-weight:700}
+.chat-hdr p{font-family:var(--font-ui);font-size:10px;color:rgba(0,0,0,.6);letter-spacing:2px;text-transform:uppercase}
+.chat-status-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse-green 2s infinite;margin-left:auto}
+.chat-msgs{padding:24px;min-height:340px;max-height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-track{background:var(--dark3)}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--gold-dark)}
+.msg{display:flex;gap:10px;animation:fadeSlideUp .4s ease both}
+.msg.user{flex-direction:row-reverse}
+.msg-av{width:34px;height:34px;border-radius:50%;background:var(--dark3);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.msg.bot .msg-av{background:var(--gold);color:var(--black)}
+.msg-bub{max-width:72%;padding:13px 18px;font-size:15px;line-height:1.6}
+.msg.bot .msg-bub{background:var(--dark3);border-left:2px solid var(--gold)}
+.msg.user .msg-bub{background:rgba(201,168,76,.14);border-right:2px solid var(--gold);text-align:right}
+.msg-time{font-family:var(--font-ui);font-size:10px;color:var(--gray);margin-top:3px;letter-spacing:1px}
+.qr-row{display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 16px}
+.qr{padding:7px 14px;border:1px solid rgba(201,168,76,.3);color:var(--gold);font-family:var(--font-ui);font-size:11px;letter-spacing:1px;cursor:pointer;transition:all .2s;background:transparent}
+.qr:hover{background:rgba(201,168,76,.1);border-color:var(--gold)}
+.chat-inp-row{padding:16px 24px;border-top:1px solid rgba(201,168,76,.1);display:flex;gap:10px}
+.chat-inp{flex:1;background:var(--dark3);border:1px solid rgba(201,168,76,.2);padding:13px 18px;color:var(--white);font-family:var(--font-body);font-size:16px;outline:none;transition:border-color .3s}
+.chat-inp:focus{border-color:var(--gold)}
+.chat-inp::placeholder{color:var(--gray)}
+.chat-send{padding:13px 22px;background:var(--gold);color:var(--black);border:none;font-family:var(--font-ui);font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600;transition:background .3s}
+.chat-send:hover{background:var(--gold-light)}
+/* REVIEWS */
+#reviews{background:var(--dark2)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1300px;margin:0 auto 50px}
+.rev-card{background:var(--dark);padding:36px;transition:all .3s}
+.rev-card:hover{background:var(--dark3)}
+.rev-q{font-family:var(--font-display);font-size:70px;color:rgba(201,168,76,.12);line-height:.5;margin-bottom:16px}
+.rev-stars{color:var(--gold);font-size:16px;margin-bottom:14px}
+.rev-text{font-size:15px;color:rgba(245,240,232,.8);line-height:1.8;font-style:italic;margin-bottom:20px}
+.rev-name{font-family:var(--font-display);font-size:17px;font-weight:700}
+.rev-loc{font-family:var(--font-ui);font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-top:4px}
+/* CONTACT */
+#contact{background:var(--black);position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;top:-200px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,.05) 0%,transparent 70%);pointer-events:none}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;max-width:1200px;margin:0 auto;align-items:start}
+.contact-info h2{font-family:var(--font-display);font-size:clamp(32px,4vw,52px);font-weight:700;line-height:1.1;margin-bottom:14px}
+.contact-info>p{font-size:16px;color:rgba(245,240,232,.7);margin-bottom:36px}
+.c-item{display:flex;align-items:flex-start;gap:18px;margin-bottom:26px;padding-bottom:26px;border-bottom:1px solid rgba(201,168,76,.1)}
+.c-icon{width:48px;height:48px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-detail h4{font-family:var(--font-ui);font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:5px}
+.c-detail p,.c-detail a{font-size:15px;color:var(--white);text-decoration:none;line-height:1.5}
+.c-detail a:hover{color:var(--gold)}
+.wa-btns{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+.wa-btn{display:flex;align-items:center;gap:14px;padding:15px 22px;background:#25D366;color:white;text-decoration:none;font-family:var(--font-ui);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:all .3s}
+.wa-btn:hover{background:#128C7E;transform:translateX(4px)}
+.wa-icon{font-size:20px}
+.wa-num{font-size:10px;opacity:.8;display:block;margin-top:1px;font-weight:400}
+.c-form{background:var(--dark2);padding:44px;border:1px solid rgba(201,168,76,.15)}
+.c-form h3{font-family:var(--font-display);font-size:26px;margin-bottom:6px}
+.c-form .fsub{color:var(--gray);font-size:14px;margin-bottom:26px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.f-grp{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.f-label{font-family:var(--font-ui);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.f-input,.f-select,.f-ta{background:var(--dark3);border:1px solid rgba(201,168,76,.2);padding:13px 16px;color:var(--white);font-family:var(--font-body);font-size:16px;outline:none;transition:border-color .3s;resize:vertical;width:100%}
+.f-input:focus,.f-select:focus,.f-ta:focus{border-color:var(--gold)}
+.f-input::placeholder,.f-ta::placeholder{color:var(--gray)}
+.policy-note{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);border-left:3px solid var(--gold);padding:14px 18px;margin-bottom:18px;font-size:13px;color:rgba(245,240,232,.75);line-height:1.7}
+/* SOCIAL */
+#social{background:var(--dark2);padding:70px 50px}
+.social-grid{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;max-width:900px;margin:30px auto 0}
+.soc-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:28px 36px;background:var(--dark);border:1px solid rgba(201,168,76,.1);text-decoration:none;color:var(--white);transition:all .3s;min-width:150px}
+.soc-card:hover{border-color:var(--gold);transform:translateY(-4px);background:var(--dark3)}
+.soc-icon{font-size:34px}
+.soc-name{font-family:var(--font-ui);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.soc-handle{font-size:13px;color:var(--gray)}
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid rgba(201,168,76,.15);padding:50px;text-align:center}
+.foot-name{font-family:var(--font-display);font-size:30px;font-weight:900;color:var(--gold);margin-bottom:8px}
+.foot-tag{font-family:var(--font-body);font-style:italic;font-size:17px;color:var(--gray);margin-bottom:22px}
+.foot-div{width:50px;height:1px;background:var(--gold);margin:0 auto 22px}
+.foot-copy{font-family:var(--font-ui);font-size:10px;letter-spacing:3px;color:var(--gray);text-transform:uppercase}
+.foot-copy a{color:var(--gold);text-decoration:none}
+/* FLOAT WA */
+.float-wa{position:fixed;bottom:28px;right:28px;z-index:7000;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.float-wa-btn{width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);animation:pulse-wa 2s ease-in-out infinite;transition:transform .3s}
+.float-wa-btn:hover{transform:scale(1.1)}
+.float-wa-label{background:var(--dark2);border:1px solid rgba(201,168,76,.2);padding:7px 14px;font-family:var(--font-ui);font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;white-space:nowrap;opacity:0;transform:translateX(10px);transition:all .3s}
+.float-wa:hover .float-wa-label{opacity:1;transform:translateX(0)}
+/* AI CHAT BUBBLE (auto popup) */
+.chat-bubble-popup{position:fixed;bottom:100px;right:28px;z-index:6999;background:var(--dark2);border:1px solid rgba(201,168,76,.3);padding:16px 20px;max-width:240px;animation:fadeSlideUp .5s ease;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.chat-bubble-popup::after{content:'';position:absolute;bottom:-8px;right:32px;width:14px;height:14px;background:var(--dark2);border-right:1px solid rgba(201,168,76,.3);border-bottom:1px solid rgba(201,168,76,.3);transform:rotate(45deg)}
+.cbp-text{font-size:14px;color:var(--white);line-height:1.6;margin-bottom:10px}
+.cbp-close{position:absolute;top:8px;right:8px;background:none;border:none;color:var(--gray);cursor:pointer;font-size:14px}
+.cbp-btns{display:flex;gap:8px;flex-wrap:wrap}
+.cbp-btn{padding:6px 12px;background:var(--gold);color:var(--black);border:none;font-family:var(--font-ui);font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:600}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:all .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav{padding:18px 28px}nav.scrolled{padding:13px 28px}
+  .nav-links{display:none}.hamburger{display:flex}
+  section{padding:80px 28px}
+  .services-grid,.reviews-grid{grid-template-columns:1fr 1fr}
+  .blog-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr;gap:36px}
+  .port-slide{min-width:calc(50% - 2px)}
+}
+@media(max-width:640px){
+  .services-grid,.blog-grid,.reviews-grid{grid-template-columns:1fr}
+  .port-slide{min-width:100%}
+  .hero-stats{gap:22px}
+  .f-row{grid-template-columns:1fr}
+  footer{padding:36px 20px}
+  #social{padding:50px 20px}
+  .policy-inner{grid-template-columns:1fr}
+  .policy-flag{display:none}
+}
+/* ANIMATIONS */
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulse-green{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+@keyframes pulse-wa{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4)}50%{box-shadow:0 4px 40px rgba(37,211,102,.7)}}
+@keyframes loadprogress{from{width:0}to{width:100%}}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">WASTI DECOR</div>
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+  <p class="loader-text">Crafting Luxury Spaces...</p>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LANG -->
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btnEn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btnUr" onclick="setLang('ur')">UR</button>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMob()">✕</button>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#portfolio" onclick="closeMob()">Portfolio</a>
+  <a href="#blog" onclick="closeMob()">Blog</a>
+  <a href="#reviews" onclick="closeMob()">Reviews</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">WASTI DECOR</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get Quote</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMob()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-slideshow">
+    <div class="slide active" style="background-image:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTBtaw5dps12RSksDbCrp3pCneim7_aHkFrR8-s-XRTuSoi9U7fAt5JwghPjmWhpsSITHYlK3frdM496fIPgYOVMwZvxDDyjPXITBMAtnhk9xlYjyHCR2Kdy75ODGH4VxpEIM6eLUEgEkNmr7KYQDWgQLP7ms7QReofapGYqjiJXT23wLVVP4KmfTdlBa0/s797/Wasti%20Decor%201%20(20).jpeg')"></div>
+    <div class="slide" style="background-image:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzsaTp9my9aZJgBW_Z6eIjTZP2O_AiSa2G96jdmLDfi9wAtuAMelq6TA4ydAwNx91SAXx5w-iRBKRR_UQj_RL94DAptLdon6baMCDVFDVdiuZtGVxrV7ub8VjSg2FuWjMrNv1U2dEVr2OFfxtHRYE3PLdUMcODkwTPkAtr9gZw0XLcwq0cbnBkD4rFz7ME/s1200/New-home-space-Planning.png')"></div>
+    <div class="slide" style="background-image:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3OWekhrdHQNXIGTShAAY-V5IlfJQFnHPpjd76860bwMgNIr2auEvfGaU2Ve2g2ExipIgmSBNtQ1jiXya3qtOVy79DG2QvXSVHTU3dxU8QEqABiIRL4jfkSWwALRw7pl7AtXiqT7vodiRoRkv5BWpvyee7zPB5LUMTtemTaPudHxfA9zb7x1LmYadrySSo/s960/colour_scheme_960x720c1pcenter.jpg')"></div>
+    <div class="slide" style="background-image:url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjr0umcUx5_pE0NLWEBv9oG9LUuw4lmXXqnXKoz5RxW-tl2GNRwqefSaxdMpLvhFLvuhYW02G0INhRwLdS-T6eSPmdsG1RsimaglmsXXzMvP2qUp8FXcMjNqLNugecq6vcTWKv9CaO8Wp4dq7KkGG-sMvDRKHm8eG9GdV-V_5Mz93GK1C70OJYOZ6a87mLv/s2000/two-business-man-construction-site-engineer-engineering-objects-workplace-with-partners-interacting-background.jpg')"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-dots" id="slideDots">
+      <span class="dot active" onclick="goSlide(0)"></span>
+      <span class="dot" onclick="goSlide(1)"></span>
+      <span class="dot" onclick="goSlide(2)"></span>
+      <span class="dot" onclick="goSlide(3)"></span>
+    </div>
+    <div class="slide-counter"><span id="slideNum">01</span> / 04</div>
+    <button class="slide-prev" onclick="changeSlide(-1)">&#8592;</button>
+    <button class="slide-next" onclick="changeSlide(1)">&#8594;</button>
+  </div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tagline"><span class="en-t">Luxury Interior & Architecture</span><span class="ur-t" style="display:none">Luxurious Interior aur Architecture</span></div>
+    <h1 class="hero-title">WASTI<br><span class="gold">INTERIOR</span><br>DECOR</h1>
+    <p class="hero-sub"><span class="en-t">Where Vision Meets Design</span><span class="ur-t" style="display:none">Jahan Khwab Haqeeqat Bante Hain</span></p>
+    <p class="hero-desc">
+      <span class="en-t">Premium Interior Design, Architecture & House Planning by <strong>Kamran Haider Wasti</strong> — serving Pakistan & clients worldwide.</span>
+      <span class="ur-t" style="display:none">Kamran Haider Wasti ke saath Pakistan aur duniya bhar mein premium interior design, architecture aur house planning.</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold"><span class="en-t">Get Free Quote</span><span class="ur-t" style="display:none">Free Quote Len</span></a>
+      <a href="#blog" class="btn-outline"><span class="en-t">Read Our Blog</span><span class="ur-t" style="display:none">Blog Parhen</span></a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-num" data-count="200">0</span><span class="stat-label en-t">Projects+</span><span class="stat-label ur-t" style="display:none">Projects+</span></div>
+      <div><span class="stat-num" data-count="5">0</span><span class="stat-label en-t">Years Exp.</span><span class="stat-label ur-t" style="display:none">Saal Tajriba</span></div>
+      <div><span class="stat-num" data-count="15">0</span><span class="stat-label en-t">Countries</span><span class="stat-label ur-t" style="display:none">Mulk</span></div>
+      <div><span class="stat-num">★5.0</span><span class="stat-label">Rating</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner">
+  <span class="ticker-item">Interior Design ◆</span><span class="ticker-item">House Maps ◆</span><span class="ticker-item">3D Visualization ◆</span><span class="ticker-item">720° Virtual Tours ◆</span><span class="ticker-item">Islamic Architecture ◆</span><span class="ticker-item">Front Elevation ◆</span><span class="ticker-item">Exterior Design ◆</span>
+  <span class="ticker-item">Interior Design ◆</span><span class="ticker-item">House Maps ◆</span><span class="ticker-item">3D Visualization ◆</span><span class="ticker-item">720° Virtual Tours ◆</span><span class="ticker-item">Islamic Architecture ◆</span><span class="ticker-item">Front Elevation ◆</span><span class="ticker-item">Exterior Design ◆</span>
+</div></div>
+
+<!-- POLICY (Pakistan clients) -->
+<section id="policy">
+  <div class="policy-inner">
+    <div class="policy-flag">🇵🇰</div>
+    <div>
+      <div class="policy-tag">Important Notice — Pakistani Clients / Pakistani Clients Ke Liye Zaroori Itlaah</div>
+      <h3 class="policy-title">Online Consultation Policy <span style="font-style:italic;font-size:18px;color:var(--gold);font-weight:400">— Online Mashwara Policy</span></h3>
+      <div class="policy-box">
+        <strong style="color:var(--gold)">🌐 English:</strong> Due to post-COVID economic conditions and the current petrol & social situation across Pakistan, <strong>face-to-face meetings at the design stage are not feasible.</strong> All consultations happen via <strong>Google Meet / WhatsApp Video Call.</strong> If a site visit is absolutely necessary, a <strong>visit fee will be charged.</strong>
+      </div>
+      <div class="policy-box">
+        <strong style="color:var(--gold)">📋 Roman Urdu:</strong> Corona ke baad ki maali mushkilaat aur petrol ki wajah se, <strong>sirf design stage ke liye seedhi mulaqaat mumkin nahi.</strong> Tamam mashwara <strong>Google Meet ya WhatsApp Video Call</strong> par hogi. Agar site visit zaroori ho to <strong>visit fee lagegi</strong> — pehle bata di jaegi.
+      </div>
+      <div class="policy-chips">
+        <div class="policy-chip">📹 <span>Google Meet / WhatsApp Call</span></div>
+        <div class="policy-chip">🏠 <span>Site Visit = Visit Fee</span></div>
+        <div class="policy-chip" style="border-color:rgba(34,197,94,.3)">✅ <span>100% Same Quality</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header reveal">
+    <div class="section-tag"><span class="en-t">What We Offer</span><span class="ur-t" style="display:none">Hamare Services</span></div>
+    <h2 class="section-title"><span class="en-t">Our Premium Services</span><span class="ur-t" style="display:none">Hamare Khaas Kaam</span></h2>
+    <p class="section-sub"><span class="en-t">From concept to completion — we craft spaces that inspire, function, and endure.</span><span class="ur-t" style="display:none">Shuruaat se anjaam tak — har space ko khoobsurat aur functional banate hain.</span></p>
+  </div>
+  <div class="services-grid">
+    <div class="srv-card reveal"><span class="srv-num">01</span><span class="srv-icon">🏠</span><h3 class="srv-title">Interior Design</h3><span class="srv-urdu">Andar ki Sajaawat</span><p class="srv-desc en-t">Complete interior transformation — living rooms, bedrooms, kitchens, offices with luxury finishes.</p><p class="srv-desc ur-t" style="display:none">Ghar ke andar ka mukammal design — drawing room, bedroom, kitchen sab kuch.</p></div>
+    <div class="srv-card reveal"><span class="srv-num">02</span><span class="srv-icon">🏗️</span><h3 class="srv-title">Architecture & House Maps</h3><span class="srv-urdu">Ghar ka Naksha</span><p class="srv-desc en-t">Professional architectural drawings and house plans ready for construction.</p><p class="srv-desc ur-t" style="display:none">Ghar aur building ka professional naksha — construction k liye tayyar.</p></div>
+    <div class="srv-card reveal"><span class="srv-num">03</span><span class="srv-icon">🎨</span><h3 class="srv-title">3D Visualization</h3><span class="srv-urdu">3D Dekhain Pehle</span><p class="srv-desc en-t">Photo-realistic 3D renders before construction — see your dream home come alive.</p><p class="srv-desc ur-t" style="display:none">Ghar banne se pehle 3D mein dekhen — bilkul asli jaise dikhega.</p></div>
+    <div class="srv-card reveal"><span class="srv-num">04</span><span class="srv-icon">🌐</span><h3 class="srv-title">720° Virtual Tours</h3><span class="srv-urdu">Ghoomen Ghar Mein</span><p class="srv-desc en-t">Immersive virtual tours — perfect for overseas clients to explore from anywhere.</p><p class="srv-desc ur-t" style="display:none">Bahir baithe Pakistani bhi apna ghar 360° mein dekh sakte hain.</p></div>
+    <div class="srv-card reveal"><span class="srv-num">05</span><span class="srv-icon">🕌</span><h3 class="srv-title">Islamic & Masjid Design</h3><span class="srv-urdu">Islami Taraz ka Kaam</span><p class="srv-desc en-t">Specialized Islamic architecture — mosques, prayer rooms with authentic design.</p><p class="srv-desc ur-t" style="display:none">Masjid aur Islami design mein maahir — authentic Islamic style ke saath.</p></div>
+    <div class="srv-card reveal"><span class="srv-num">06</span><span class="srv-icon">🏢</span><h3 class="srv-title">Exterior & Front Elevation</h3><span class="srv-urdu">Bahar ki Khubsurti</span><p class="srv-desc en-t">Stunning front elevations — make your property stand out in the neighborhood.</p><p class="srv-desc ur-t" style="display:none">Ghar ke bahar ki design — mohalle mein aap ka ghar sabse alag dikhe.</p></div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header reveal">
+    <div class="section-tag"><span class="en-t">Our Work</span><span class="ur-t" style="display:none">Hamare Kaam</span></div>
+    <h2 class="section-title"><span class="en-t">Featured Projects</span><span class="ur-t" style="display:none">Mukammal Projects</span></h2>
+    <p class="section-sub en-t">Every space tells a story — explore our portfolio.</p><p class="section-sub ur-t" style="display:none">Har space ek kahani hai — hamare projects dekhen.</p>
+  </div>
+  <div class="port-slider reveal">
+    <div class="port-track" id="portTrack">
+      <div class="port-slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTBtaw5dps12RSksDbCrp3pCneim7_aHkFrR8-s-XRTuSoi9U7fAt5JwghPjmWhpsSITHYlK3frdM496fIPgYOVMwZvxDDyjPXITBMAtnhk9xlYjyHCR2Kdy75ODGH4VxpEIM6eLUEgEkNmr7KYQDWgQLP7ms7QReofapGYqjiJXT23wLVVP4KmfTdlBa0/s797/Wasti%20Decor%201%20(20).jpeg" alt="Interior Design"><div class="port-overlay"><div class="port-cat">Interior Design</div><div class="port-title">Luxury Interior — Wasti Decor</div></div></div>
+      <div class="port-slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzsaTp9my9aZJgBW_Z6eIjTZP2O_AiSa2G96jdmLDfi9wAtuAMelq6TA4ydAwNx91SAXx5w-iRBKRR_UQj_RL94DAptLdon6baMCDVFDVdiuZtGVxrV7ub8VjSg2FuWjMrNv1U2dEVr2OFfxtHRYE3PLdUMcODkwTPkAtr9gZw0XLcwq0cbnBkD4rFz7ME/s1200/New-home-space-Planning.png" alt="House Plan"><div class="port-overlay"><div class="port-cat">Architecture</div><div class="port-title">House Space Planning</div></div></div>
+      <div class="port-slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3OWekhrdHQNXIGTShAAY-V5IlfJQFnHPpjd76860bwMgNIr2auEvfGaU2Ve2g2ExipIgmSBNtQ1jiXya3qtOVy79DG2QvXSVHTU3dxU8QEqABiIRL4jfkSWwALRw7pl7AtXiqT7vodiRoRkv5BWpvyee7zPB5LUMTtemTaPudHxfA9zb7x1LmYadrySSo/s960/colour_scheme_960x720c1pcenter.jpg" alt="Color Scheme"><div class="port-overlay"><div class="port-cat">Interior Styling</div><div class="port-title">Colour & Material Design</div></div></div>
+      <div class="port-slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjr0umcUx5_pE0NLWEBv9oG9LUuw4lmXXqnXKoz5RxW-tl2GNRwqefSaxdMpLvhFLvuhYW02G0INhRwLdS-T6eSPmdsG1RsimaglmsXXzMvP2qUp8FXcMjNqLNugecq6vcTWKv9CaO8Wp4dq7KkGG-sMvDRKHm8eG9GdV-V_5Mz93GK1C70OJYOZ6a87mLv/s2000/two-business-man-construction-site-engineer-engineering-objects-workplace-with-partners-interacting-background.jpg" alt="Consultation"><div class="port-overlay"><div class="port-cat">Consultation</div><div class="port-title">Site Consultation & Planning</div></div></div>
+      <div class="port-slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwKWM78AhGISe-si6UehvrHhKd4EU_bBwdyNJJH64sUQISPzwOGNuhqZBCUwRkaIewSP0iJHEI-nAeaBiISlpr2wgrjmfzVGrxZvkIjHO7XOQySekk3sHRSz6UNqy-25H1_xQTpsWtvhd5eM-CnbOTTAl5F80fl6gSKppqY6rQpXaHp2Sq7XSdtmArrf4O/s900/Diverse-Applications-of-Drones-Across-Various-Industries.jpg" alt="Virtual Tour"><div class="port-overlay"><div class="port-cat">720° Virtual Tour</div><div class="port-title">360° Immersive Tour</div></div></div>
+      <div class="port-slide"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFga_ote0_Vvts_XrZKcVotAmAdV2bEdk5VdDfumbXMur4Z1lIq0r60jYLEKL9vm_Why-vVIgwFVd-94IP7-5r_xdrC9ojAVn6r4dz9v-dA_Xt3teAa91eFqb7e3JX2CYIi5XHG3aUtwJ_h_sbbwmcYJ4U6NAyo5cwoXWoR5EbQraVDDkNvCPTeQs2EbLc/s1500/Top+5+KPIs+Your+Law+Firm+Should+Be+Tracking.jpg" alt="Project Management"><div class="port-overlay"><div class="port-cat">Project Management</div><div class="port-title">End-to-End Execution</div></div></div>
+    </div>
+  </div>
+  <div class="port-nav reveal">
+    <button class="port-btn" onclick="portMove(-1)">&#8592;</button>
+    <div class="port-dots-row" id="portDots"><span class="pdot active"></span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>
+    <button class="port-btn" onclick="portMove(1)">&#8594;</button>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="section-header reveal">
+    <div class="section-tag">AI-Powered Blog</div>
+    <h2 class="section-title"><span class="en-t">Latest Interior Insights</span><span class="ur-t" style="display:none">Nayi Interior Tips</span></h2>
+    <p class="section-sub"><span class="en-t">Daily AI-generated blogs on trending interior decor & architecture</span><span class="ur-t" style="display:none">Roz nayi trending interior decor tips — AI se generate hoti hain</span></p>
+  </div>
+  <div style="max-width:1300px;margin:0 auto">
+    <div class="blog-controls">
+      <div class="blog-filters">
+        <button class="filter-btn active" onclick="filterBlog('all',this)">All</button>
+        <button class="filter-btn" onclick="filterBlog('interior',this)">Interior</button>
+        <button class="filter-btn" onclick="filterBlog('architecture',this)">Architecture</button>
+        <button class="filter-btn" onclick="filterBlog('islamic',this)">Islamic</button>
+        <button class="filter-btn" onclick="filterBlog('tips',this)">Tips</button>
+      </div>
+    </div>
+  </div>
+  <div class="blog-grid" id="blogGrid">
+    <!-- Posts loaded by JS -->
+  </div>
+  <div style="text-align:center;margin-top:44px" class="reveal">
+    <button class="btn-gold" onclick="loadMorePosts()"><span class="en-t">Load More Posts</span><span class="ur-t" style="display:none">Mazeed Posts</span></button>
+  </div>
+</section>
+
+<!-- AI CHAT -->
+<section id="ai-section">
+  <div class="section-header reveal">
+    <div class="section-tag">AI Consultant</div>
+    <h2 class="section-title"><span class="en-t">Chat with Our AI Expert</span><span class="ur-t" style="display:none">AI Expert Se Baat Karen</span></h2>
+    <p class="section-sub"><span class="en-t">Get instant answers about design, pricing & projects — 24/7</span><span class="ur-t" style="display:none">Design, price aur projects ke baare mein farori jawab — 24/7</span></p>
+  </div>
+  <div class="chat-wrap reveal">
+    <div class="chat-win">
+      <div class="chat-hdr">
+        <div class="chat-hdr-av">🏠</div>
+        <div><h3>Wasti AI Consultant</h3><p>Interior & Architecture Expert</p></div>
+        <div class="chat-status-dot"></div>
+      </div>
+      <div class="chat-msgs" id="chatMsgs"></div>
+      <div class="qr-row" id="qrRow">
+        <button class="qr" onclick="sendQ('Interior design ka kharcha?')">💰 Cost?</button>
+        <button class="qr" onclick="sendQ('Ghar ka naksha chahiye')">🏠 Naksha</button>
+        <button class="qr" onclick="sendQ('3D design dikhana hai')">🎨 3D Design</button>
+        <button class="qr" onclick="sendQ('How long does a project take?')">⏱️ Timeline?</button>
+        <button class="qr" onclick="sendQ('International client hun')">🌍 International</button>
+        <button class="qr" onclick="sendQ('Meeting kaise hogi?')">📹 Meeting?</button>
+      </div>
+      <div class="chat-inp-row">
+        <input type="text" class="chat-inp" id="chatInp" placeholder="Type your question... / Apna sawal likhein..." onkeypress="if(event.key==='Enter')sendMsg()">
+        <button class="chat-send" onclick="sendMsg()">Send</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-header reveal">
+    <div class="section-tag"><span class="en-t">Client Reviews</span><span class="ur-t" style="display:none">Client Reviews</span></div>
+    <h2 class="section-title"><span class="en-t">What Our Clients Say</span><span class="ur-t" style="display:none">Humari Clients Kehte Hain</span></h2>
+  </div>
+  <div class="reviews-grid" id="reviewsGrid">
+    <div class="rev-card reveal"><div class="rev-q">"</div><div class="rev-stars">★★★★★</div><p class="rev-text">"Kamran bhai ne hamare ghar ko bilkul aisi tarah design kiya jaise humne sapne mein dekha tha. Professional, punctual aur outstanding work!"</p><div class="rev-name">Ahmad Raza</div><div class="rev-loc">DHA Lahore, Pakistan</div></div>
+    <div class="rev-card reveal"><div class="rev-q">"</div><div class="rev-stars">★★★★★</div><p class="rev-text">"Excellent work! The 3D visualization was spot on and the final result matched perfectly. Highly recommend Wasti Interior Decor."</p><div class="rev-name">Sarah M.</div><div class="rev-loc">Dubai, UAE</div></div>
+    <div class="rev-card reveal"><div class="rev-q">"</div><div class="rev-stars">★★★★★</div><p class="rev-text">"720° virtual tour ne toh kamaal kar diya — London se apna ghar dekhna itna easy ho gaya. Shukriya Wasti Decor!"</p><div class="rev-name">Bilal Khan</div><div class="rev-loc">London, UK</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="section-tag" style="justify-content:flex-start;margin-bottom:16px"><span class="en-t">Get In Touch</span><span class="ur-t" style="display:none">Hamare Saath Rabta Karen</span></div>
+      <h2><span class="en-t">Start Your Dream Project</span><span class="ur-t" style="display:none">Apna Project Shuru Karen</span></h2>
+      <p><span class="en-t">Free consultation — serving Pakistan & worldwide clients.</span><span class="ur-t" style="display:none">Free mashwara — Pakistan aur duniya bhar mein service.</span></p>
+      <div class="c-item"><div class="c-icon">📍</div><div class="c-detail"><h4>Address</h4><p>Johar Town, Lahore, Pakistan</p></div></div>
+      <div class="c-item"><div class="c-icon">📧</div><div class="c-detail"><h4>Email</h4><a href="mailto:wastidecor@gmail.com">wastidecor@gmail.com</a></div></div>
+      <div class="c-item"><div class="c-icon">🌐</div><div class="c-detail"><h4>Blog</h4><a href="https://wastidecor.blogspot.com" target="_blank">wastidecor.blogspot.com</a></div></div>
+      <div class="wa-btns">
+        <a href="https://wa.me/923025074727?text=Assalam%20o%20Alaikum!%20Website%20se%20contact%20kar%20raha%20hun." class="wa-btn" target="_blank"><span class="wa-icon">💬</span><div><div>Kamran Wasti — WhatsApp</div><span class="wa-num">+92 302 507 4727</span></div></a>
+        <a href="https://wa.me/923456710694?text=Assalam%20o%20Alaikum!%20Website%20se%20contact%20kar%20raha%20hun." class="wa-btn" target="_blank"><span class="wa-icon">💬</span><div><div>Office — WhatsApp</div><span class="wa-num">+92 345 671 0694</span></div></a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="c-form">
+        <h3><span class="en-t">Request Free Quote</span><span class="ur-t" style="display:none">Free Quote Manga</span></h3>
+        <p class="fsub"><span class="en-t">Fill form → sent to WhatsApp instantly</span><span class="ur-t" style="display:none">Form bharen → WhatsApp par farori</span></p>
+        <div class="f-row">
+          <div class="f-grp"><label class="f-label">Name</label><input type="text" class="f-input" id="cName" placeholder="Your name"></div>
+          <div class="f-grp"><label class="f-label">WhatsApp</label><input type="tel" class="f-input" id="cPhone" placeholder="+92..."></div>
+        </div>
+        <div class="f-grp"><label class="f-label">Service</label>
+          <select class="f-select" id="cService">
+            <option value="">Select service...</option>
+            <option>Interior Design</option><option>House Map / Architecture</option>
+            <option>3D Visualization</option><option>720° Virtual Tour</option>
+            <option>Islamic / Masjid Design</option><option>Front Elevation / Exterior</option>
+            <option>Complete Project</option>
+          </select>
+        </div>
+        <div class="f-grp"><label class="f-label">Details</label><textarea class="f-ta" id="cDetails" rows="4" placeholder="Tell us about your project..."></textarea></div>
+        <div class="policy-note">🇵🇰 <strong>Pakistani Clients:</strong> Design meetings via Google Meet / WhatsApp Video only. Site visit = visit fee applicable.<br><span style="color:rgba(245,240,232,.6)">Design stage mein face-to-face mumkin nahi — Google Meet ya WhatsApp call hogi.</span></div>
+        <button class="btn-gold" onclick="submitQuote()" style="width:100%;border:none;cursor:pointer"><span class="en-t">Send to WhatsApp →</span><span class="ur-t" style="display:none">WhatsApp Par Bhejein →</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social" style="background:var(--dark2);padding:70px 50px">
+  <h2 style="font-family:var(--font-display);font-size:36px;text-align:center;margin-bottom:40px" class="reveal">Follow <span style="color:var(--gold)">Wasti Decor</span></h2>
+  <div class="social-grid reveal">
+    <a href="https://www.facebook.com/WASTI.INTERIOR.DECOR" target="_blank" class="soc-card"><span class="soc-icon">📘</span><span class="soc-name">Facebook</span><span class="soc-handle">WASTI.INTERIOR.DECOR</span></a>
+    <a href="https://www.youtube.com/@WASTIDECOR" target="_blank" class="soc-card"><span class="soc-icon">📺</span><span class="soc-name">YouTube</span><span class="soc-handle">@WASTIDECOR</span></a>
+    <a href="https://www.instagram.com/wastiinteriordecor/" target="_blank" class="soc-card"><span class="soc-icon">📷</span><span class="soc-name">Instagram</span><span class="soc-handle">@wastiinteriordecor</span></a>
+    <a href="https://www.tiktok.com/@kamranhaiderwasti" target="_blank" class="soc-card"><span class="soc-icon">🎵</span><span class="soc-name">TikTok</span><span class="soc-handle">@kamranhaiderwasti</span></a>
+    <a href="https://wastidecor.blogspot.com" target="_blank" class="soc-card"><span class="soc-icon">✍️</span><span class="soc-name">Blog</span><span class="soc-handle">wastidecor.blogspot.com</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-name">WASTI INTERIOR DECOR</div>
+  <p class="foot-tag">Where Vision Meets Design — Jahan Khwab Haqeeqat Bante Hain</p>
+  <div class="foot-div"></div>
+  <p class="foot-copy">© 2025 Wasti Interior Decor | Kamran Haider Wasti | Johar Town, Lahore | <a href="mailto:wastidecor@gmail.com">wastidecor@gmail.com</a></p>
+</footer>
+
+<!-- FLOAT WA -->
+<div class="float-wa">
+  <span class="float-wa-label">Chat on WhatsApp</span>
+  <a href="https://wa.me/923025074727?text=Assalam%20o%20Alaikum!%20Website%20se%20contact%20kar%20raha%20hun." class="float-wa-btn" target="_blank">💬</a>
+</div>
+
+<!-- AI CHAT POPUP (auto) -->
+<div class="chat-bubble-popup" id="chatPopup" style="display:none">
+  <button class="cbp-close" onclick="document.getElementById('chatPopup').style.display='none'">✕</button>
+  <p class="cbp-text">👋 <strong>Assalam o Alaikum!</strong><br>Ghar ka design ya naksha chahiye? Main help kar sakta hun!</p>
+  <div class="cbp-btns">
+    <button class="cbp-btn" onclick="openChat('Interior design chahiye')">Design</button>
+    <button class="cbp-btn" onclick="openChat('Naksha chahiye')">Naksha</button>
+    <button class="cbp-btn" onclick="openChat('Quote lena hai')">Quote</button>
+  </div>
+</div>
+
+<script>
+// ========== BLOG DATA ==========
+const BLOG_POSTS = [
+  {id:1,cat:'interior',catLabel:'Interior Design',title:'Top 10 Living Room Design Trends in Pakistan 2025',titleUr:'Pakistan mein 2025 ki Top 10 Drawing Room Designs',excerpt:'Discover the hottest interior design trends taking Pakistani homes by storm — from earthy tones to smart furniture solutions.',excerptUr:'Pakistan ke gharoon mein 2025 ki sab se trending drawing room designs — earthy colors se lekar smart furniture tak.',img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTBtaw5dps12RSksDbCrp3pCneim7_aHkFrR8-s-XRTuSoi9U7fAt5JwghPjmWhpsSITHYlK3frdM496fIPgYOVMwZvxDDyjPXITBMAtnhk9xlYjyHCR2Kdy75ODGH4VxpEIM6eLUEgEkNmr7KYQDWgQLP7ms7QReofapGYqjiJXT23wLVVP4KmfTdlBa0/s797/Wasti%20Decor%201%20(20).jpeg',date:'Apr 5, 2025',ai:true,content:`<p>Interior design in Pakistan has evolved dramatically over the past few years. Homeowners across Lahore, Karachi, and Islamabad are now embracing global trends while keeping their cultural identity intact.</p><h2>1. Earthy & Warm Tones</h2><p>Terracotta, warm beige, and deep brown are dominating Pakistani living rooms in 2025. These colors create warmth and connect with our cultural roots.</p><h2>2. Multifunctional Furniture</h2><p>With smaller urban apartments becoming common, furniture that serves multiple purposes is in high demand — storage ottomans, sofa beds, and fold-away dining tables.</p><h2>3. Marble & Stone Textures</h2><p>Pakistani homes are embracing natural stone textures — marble floors, stone accent walls, and granite countertops for that luxury feel.</p><h2>4. Smart Home Integration</h2><p>Automated lighting, smart curtains, and voice-controlled systems are no longer just for the elite — they're becoming mainstream in Pakistan's urban homes.</p><h2>5. Biophilic Design</h2><p>Plants, green walls, and natural light are central to 2025's design philosophy — bringing nature indoors for a calming, healthy environment.</p>`},
+  {id:2,cat:'architecture',catLabel:'Architecture',title:'5 Marla House Design Ideas for Lahore Families',titleUr:'Lahore Families ke liye 5 Marla Ghar ke Best Designs',excerpt:'Smart space planning solutions for 5 marla plots — maximize every inch with clever architecture and interior design strategies.',excerptUr:'5 marla plot ke liye smart design ideas — har inch ka zyada se zyada faida uthayein.',img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzsaTp9my9aZJgBW_Z6eIjTZP2O_AiSa2G96jdmLDfi9wAtuAMelq6TA4ydAwNx91SAXx5w-iRBKRR_UQj_RL94DAptLdon6baMCDVFDVdiuZtGVxrV7ub8VjSg2FuWjMrNv1U2dEVr2OFfxtHRYE3PLdUMcODkwTPkAtr9gZw0XLcwq0cbnBkD4rFz7ME/s1200/New-home-space-Planning.png',date:'Apr 4, 2025',ai:true,content:`<p>A 5 marla plot (approximately 1,125 square feet) is one of the most common residential plot sizes in Lahore's housing societies. With smart planning, you can build a beautiful, functional home that feels much larger than its dimensions suggest.</p><h2>Ground Floor Optimization</h2><p>For a 5 marla house, we recommend placing the drawing room, dining area, kitchen, and one bedroom on the ground floor. An open-plan layout connecting the kitchen and dining creates a spacious feel.</p><h2>Upper Floor Design</h2><p>Typically 2-3 bedrooms with attached bathrooms fit comfortably on the upper floor of a 5 marla house. A rooftop terrace adds valuable outdoor living space.</p><h2>Parking Solutions</h2><p>A single car porch with a small lawn in front works well. We recommend leaving space for future extension if needed.</p><h2>Vertical Space Usage</h2><p>High ceilings, mezzanine storage, and built-in wardrobes make 5 marla homes feel luxurious without adding floor area.</p>`},
+  {id:3,cat:'islamic',catLabel:'Islamic Design',title:'Incorporating Islamic Patterns in Modern Home Decor',titleUr:'Modern Ghar mein Islami Design ka Khoobsurat Istemal',excerpt:'Blend traditional Islamic artistry with contemporary design — a complete guide to creating a soulful, beautiful living space.',excerptUr:'Aadhunik design mein Islami art ka sangam — ek mukammal guide khoobsurat ghar banane ke liye.',img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3OWekhrdHQNXIGTShAAY-V5IlfJQFnHPpjd76860bwMgNIr2auEvfGaU2Ve2g2ExipIgmSBNtQ1jiXya3qtOVy79DG2QvXSVHTU3dxU8QEqABiIRL4jfkSWwALRw7pl7AtXiqT7vodiRoRkv5BWpvyee7zPB5LUMTtemTaPudHxfA9zb7x1LmYadrySSo/s960/colour_scheme_960x720c1pcenter.jpg',date:'Apr 3, 2025',ai:true,content:`<p>Islamic architecture has a rich 1,400-year history of breathtaking geometric patterns, intricate calligraphy, and harmonious spatial design. Today, these timeless elements are finding their way into modern Pakistani homes in beautiful new ways.</p><h2>Geometric Patterns</h2><p>Arabesque geometric patterns in tiles, screens (jalis), and wall art add an authentic Islamic touch without overwhelming modern interiors. Consider a feature wall with a geometric tile pattern in your drawing room.</p><h2>Islamic Calligraphy</h2><p>Quranic verses rendered in beautiful calligraphy — whether on canvas, carved wood, or metal — serve as both spiritual reminders and stunning art pieces.</p><h2>Mashrabiya Screens</h2><p>Traditional latticed wooden screens (mashrabiya) allow light and air to flow through while maintaining privacy. Modern versions in laser-cut metal or wood are perfect room dividers.</p><h2>Color Palette</h2><p>Deep teals, rich golds, warm creams, and terracotta — the traditional Islamic color palette — translate beautifully into modern interiors while maintaining cultural authenticity.</p>`},
+  {id:4,cat:'tips',catLabel:'Design Tips',title:'How to Choose the Perfect Color Scheme for Your Home',titleUr:'Apne Ghar ke Liye Perfect Color Scheme Kaise Chunen',excerpt:'Color selection can make or break your interior design. Learn the professional secrets to choosing colors that transform spaces.',excerptUr:'Color selection ghar ki khubsurti mein sabse ahem kirdar ada karta hai. Professionals ke raaz janiye.',img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3OWekhrdHQNXIGTShAAY-V5IlfJQFnHPpjd76860bwMgNIr2auEvfGaU2Ve2g2ExipIgmSBNtQ1jiXya3qtOVy79DG2QvXSVHTU3dxU8QEqABiIRL4jfkSWwALRw7pl7AtXiqT7vodiRoRkv5BWpvyee7zPB5LUMTtemTaPudHxfA9zb7x1LmYadrySSo/s960/colour_scheme_960x720c1pcenter.jpg',date:'Apr 2, 2025',ai:true,content:`<p>Choosing the right color scheme is one of the most important decisions in interior design. The wrong colors can make a room feel small, cold, or chaotic — while the right ones create harmony, warmth, and personality.</p><h2>The 60-30-10 Rule</h2><p>Professional designers use this simple formula: 60% dominant color (walls), 30% secondary color (furniture, rugs), 10% accent color (cushions, art, accessories).</p><h2>Understanding Light in Pakistan</h2><p>Pakistan gets intense sunlight — colors look different in bright sunshine vs. artificial evening light. Always test paint samples at different times of day before committing.</p><h2>Warm vs. Cool Tones</h2><p>For Pakistan's hot climate, cool blues and greens create psychological coolness. For cozy family spaces, warm creams and terracottas work beautifully.</p><h2>Creating Flow</h2><p>For open-plan spaces, use variations of the same color family throughout to create visual flow and make the space feel larger and more cohesive.</p>`},
+  {id:5,cat:'interior',catLabel:'Interior Design',title:'Luxury Bedroom Design: Creating Your Personal Sanctuary',titleUr:'Luxury Bedroom Design: Apna Personal Sanctuary Banayein',excerpt:'Transform your bedroom into a five-star hotel experience with these expert interior design tips for Pakistani homes.',excerptUr:'Apne bedroom ko five-star hotel jaise bana den — Pakistan ke gharoon ke liye expert tips.',img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTBtaw5dps12RSksDbCrp3pCneim7_aHkFrR8-s-XRTuSoi9U7fAt5JwghPjmWhpsSITHYlK3frdM496fIPgYOVMwZvxDDyjPXITBMAtnhk9xlYjyHCR2Kdy75ODGH4VxpEIM6eLUEgEkNmr7KYQDWgQLP7ms7QReofapGYqjiJXT23wLVVP4KmfTdlBa0/s797/Wasti%20Decor%201%20(20).jpeg',date:'Apr 1, 2025',ai:true,content:`<p>Your bedroom is the most personal space in your home — it should reflect your personality while providing absolute comfort and rest. Luxury bedroom design isn't about spending a fortune; it's about making thoughtful choices.</p><h2>The Perfect Bed Setup</h2><p>An upholstered headboard, high-quality bedding in neutral tones, and layered pillows create an instantly luxurious look. Add bedside tables at the right height — 2-3 inches higher than your mattress.</p><h2>Lighting Layers</h2><p>Layer your lighting: ambient (ceiling), task (bedside lamps), and accent (wardrobe lights). Dimmable lighting transforms the mood from productive mornings to relaxing evenings.</p><h2>Walk-in Wardrobe</h2><p>If space allows, a small walk-in wardrobe with organized storage, good lighting, and a full-length mirror adds tremendous value and daily luxury.</p><h2>Texture & Fabric</h2><p>Velvet, linen, and silk cushions; thick rugs underfoot; heavy curtains that block out light — these tactile elements make a bedroom feel truly luxurious.</p>`},
+  {id:6,cat:'architecture',catLabel:'Architecture',title:'Modern Front Elevation Designs for Pakistani Homes 2025',titleUr:'Pakistani Gharoon ke Liye 2025 ke Modern Front Elevation Designs',excerpt:'First impressions matter. Discover the latest front elevation trends that are transforming Pakistani neighborhood streetscapes.',excerptUr:'Pehla impression sabse ahem hota hai. 2025 ke latest front elevation trends janiye.',img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjr0umcUx5_pE0NLWEBv9oG9LUuw4lmXXqnXKoz5RxW-tl2GNRwqefSaxdMpLvhFLvuhYW02G0INhRwLdS-T6eSPmdsG1RsimaglmsXXzMvP2qUp8FXcMjNqLNugecq6vcTWKv9CaO8Wp4dq7KkGG-sMvDRKHm8eG9GdV-V_5Mz93GK1C70OJYOZ6a87mLv/s2000/two-business-man-construction-site-engineer-engineering-objects-workplace-with-partners-interacting-background.jpg',date:'Mar 31, 2025',ai:true,content:`<p>Your home's front elevation is its face to the world — and in Pakistan's competitive real estate market, a stunning facade can significantly increase property value while creating neighborhood envy.</p><h2>Contemporary Minimalism</h2><p>Clean lines, flat roofs, large windows, and monochromatic color schemes are dominating 2025's front elevation trends. Less is more — let quality materials speak.</p><h2>Stone & Brick Cladding</h2><p>Natural stone cladding on feature walls creates texture and visual interest. Pakistani homes are increasingly using local stone materials for authentic, unique facades.</p><h2>Smart Integration</h2><p>Built-in landscape lighting, automated gates, and video doorbell integration are becoming standard in new construction and renovation projects.</p><h2>Green Elements</h2><p>Vertical gardens, climbing plants, and large trees at the entrance soften hard architectural lines and add life to the facade.</p>`}
+];
+
+let currentFilter = 'all';
+let visiblePosts = 3;
+let currentPost = null;
+const BLOGSPOT_URL = 'https://wastidecor.blogspot.com';
+
+// ========== RENDER BLOG ==========
+function renderBlog() {
+  const grid = document.getElementById('blogGrid');
+  const filtered = currentFilter === 'all' ? BLOG_POSTS : BLOG_POSTS.filter(p => p.cat === currentFilter);
+  const toShow = filtered.slice(0, visiblePosts);
+  const lang = document.getElementById('btnUr').classList.contains('active') ? 'ur' : 'en';
+
+  grid.innerHTML = toShow.map(p => `
+    <div class="blog-card reveal" onclick="openPost(${p.id})">
+      <div class="blog-thumb">
+        ${p.img ? `<img src="${p.img}" alt="${p.title}" loading="lazy">` : `<div class="blog-thumb-placeholder">📝</div>`}
+      </div>
+      <div class="blog-body">
+        <div class="blog-cat">${p.catLabel}</div>
+        <h3 class="blog-title">${lang==='ur'?p.titleUr:p.title}</h3>
+        <p class="blog-excerpt">${lang==='ur'?p.excerptUr:p.excerpt}</p>
+        <a class="read-more-btn">Read Full Post →</a>
+        <div class="blog-meta">
+          <span>${p.date}</span>
+          ${p.ai ? '<span class="ai-badge">AI Generated</span>' : ''}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // re-observe reveals
+  grid.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+}
+
+function filterBlog(cat, btn) {
+  currentFilter = cat;
+  visiblePosts = 3;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBlog();
+}
+
+function loadMorePosts() {
+  visiblePosts += 3;
+  renderBlog();
+}
+
+// ========== POST MODAL ==========
+function openPost(id) {
+  const p = BLOG_POSTS.find(x => x.id === id);
+  if (!p) return;
+  currentPost = p;
+  const lang = document.getElementById('btnUr').classList.contains('active') ? 'ur' : 'en';
+  const comments = getComments(id);
+
+  const modal = document.createElement('div');
+  modal.className = 'post-modal open';
+  modal.id = 'postModal';
+  modal.innerHTML = `
+    <div class="post-modal-bg" onclick="closePost()"></div>
+    <div class="post-modal-inner">
+      <button class="post-modal-close" onclick="closePost()">✕</button>
+      ${p.img ? `<img src="${p.img}" alt="${p.title}" class="post-modal-img">` : ''}
+      <div class="post-modal-body">
+        <div class="post-modal-cat">${p.catLabel}</div>
+        <h1 class="post-modal-title">${lang==='ur'?p.titleUr:p.title}</h1>
+        <div class="post-modal-meta">
+          <span>📅 ${p.date}</span>
+          <span>✍️ Kamran Haider Wasti</span>
+          <span>📍 Lahore, Pakistan</span>
+          ${p.ai?'<span class="ai-badge">AI Generated</span>':''}
+        </div>
+        <div class="post-modal-content">${p.content}</div>
+        <a href="${BLOGSPOT_URL}" target="_blank" class="blogspot-link">📖 Read more on our Blogspot →</a>
+        
+        <div class="comments-section">
+          <h3 class="comments-title">💬 Comments (${comments.length})</h3>
+          <div id="commentsContainer">${comments.map(c=>`
+            <div class="comment-item">
+              <div class="comment-author">👤 ${c.name} &nbsp;•&nbsp; ${c.date}</div>
+              <p class="comment-text">${c.text}</p>
+            </div>`).join('')}
+            ${comments.length===0?'<p style="color:var(--gray);font-size:15px">No comments yet. Be the first!</p>':''}
+          </div>
+          <div class="comment-form">
+            <h4>Leave a Comment</h4>
+            <input type="text" class="c-input" id="cName2" placeholder="Your name">
+            <textarea class="c-textarea" id="cText" rows="3" placeholder="Share your thoughts..."></textarea>
+            <button class="btn-gold" onclick="submitComment(${id})" style="border:none;cursor:pointer;padding:12px 28px">Post Comment</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  document.body.style.overflow = 'hidden';
+}
+
+function closePost() {
+  const m = document.getElementById('postModal');
+  if (m) { m.remove(); document.body.style.overflow = ''; }
+}
+
+// ========== COMMENTS ==========
+function getComments(postId) {
+  try { return JSON.parse(localStorage.getItem('comments_'+postId)||'[]'); } catch { return []; }
+}
+function saveComment(postId, comment) {
+  const comments = getComments(postId);
+  comments.push(comment);
+  localStorage.setItem('comments_'+postId, JSON.stringify(comments));
+}
+function submitComment(postId) {
+  const name = document.getElementById('cName2').value.trim();
+  const text = document.getElementById('cText').value.trim();
+  if (!name || !text) { alert('Please fill your name and comment!'); return; }
+  const comment = { name, text, date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) };
+  saveComment(postId, comment);
+  const container = document.getElementById('commentsContainer');
+  const div = document.createElement('div');
+  div.className = 'comment-item';
+  div.innerHTML = `<div class="comment-author">👤 ${name} &nbsp;•&nbsp; ${comment.date}</div><p class="comment-text">${text}</p>`;
+  container.insertBefore(div, container.firstChild);
+  document.getElementById('cName2').value = '';
+  document.getElementById('cText').value = '';
+  // Auto-share to Blogspot (open link)
+  const bsMsg = encodeURIComponent(`New comment on Wasti Decor website!\n\nPost: ${currentPost.title}\nComment by: ${name}\n"${text}"\n\nView full post: wastidecor.com`);
+  // notification only - no redirect
+}
+
+// ========== HERO SLIDESHOW ==========
+let curSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+const slideNumEl = document.getElementById('slideNum');
+function goSlide(n) {
+  slides[curSlide].classList.remove('active');
+  dots[curSlide].classList.remove('active');
+  curSlide = (n + slides.length) % slides.length;
+  slides[curSlide].classList.add('active');
+  dots[curSlide].classList.add('active');
+  if(slideNumEl) slideNumEl.textContent = String(curSlide+1).padStart(2,'0');
+}
+function changeSlide(d) { goSlide(curSlide+d); }
+setInterval(() => changeSlide(1), 5000);
+
+// ========== PORTFOLIO SLIDER ==========
+let portIdx = 0;
+const portTrack = document.getElementById('portTrack');
+const portDotEls = document.querySelectorAll('.pdot');
+const totalPort = 6, visPort = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+function updatePort() {
+  if(!portTrack) return;
+  const w = portTrack.parentElement.offsetWidth / (window.innerWidth<640?1:window.innerWidth<1024?2:3);
+  portTrack.style.transform = `translateX(-${portIdx*(w+3)}px)`;
+  portDotEls.forEach((d,i) => d.classList.toggle('active', i===portIdx));
+}
+function portMove(d) {
+  const vp = window.innerWidth<640?1:window.innerWidth<1024?2:3;
+  portIdx = Math.max(0, Math.min(totalPort-vp, portIdx+d));
+  updatePort();
+}
+window.addEventListener('resize', updatePort);
+
+// ========== AI CHATBOT ==========
+const API_URL = 'https://api.anthropic.com/v1/messages';
+let isBusy = false;
+const SYSTEM = `You are Wasti Interior Decor's AI consultant. Company run by Kamran Haider Wasti — architect and interior designer, Johar Town, Lahore, Pakistan. Services: Interior Design, Architecture & House Maps, 3D Visualization, 720° Virtual Tours, Islamic/Masjid Design, Front Elevation/Exterior. WhatsApp: +92-302-5074727 and +92-345-6710694. Email: wastidecor@gmail.com. PAKISTAN POLICY: Due to post-COVID conditions, face-to-face meetings at design stage are NOT possible. All meetings via Google Meet or WhatsApp Video Call only. Site visit requires visit fee — communicated in advance. Always mention this policy to Pakistani clients asking about meetings. For pricing say "Contact for Quote" and direct to WhatsApp. Reply in same language as user — Roman Urdu or English. Be warm, helpful, professional. End replies by offering WhatsApp consultation.`;
+
+function addMsg(text, role) {
+  const d = document.createElement('div');
+  d.className = `msg ${role}`;
+  d.innerHTML = `<div class="msg-av">${role==='bot'?'🤖':'👤'}</div><div><div class="msg-bub">${text}</div><div class="msg-time">${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}${role==='bot'?' • AI':''}</div></div>`;
+  document.getElementById('chatMsgs').appendChild(d);
+  document.getElementById('chatMsgs').scrollTop = 9999;
+}
+function showTyping() {
+  const d = document.createElement('div'); d.className='msg bot'; d.id='typing';
+  d.innerHTML=`<div class="msg-av">🤖</div><div><div class="msg-bub" style="letter-spacing:4px;color:var(--gold)">● ● ●</div></div>`;
+  document.getElementById('chatMsgs').appendChild(d);
+  document.getElementById('chatMsgs').scrollTop = 9999;
+}
+function removeTyping() { const t=document.getElementById('typing'); if(t) t.remove(); }
+
+async function sendMsg() {
+  const inp = document.getElementById('chatInp');
+  const text = inp.value.trim();
+  if(!text || isBusy) return;
+  inp.value = ''; isBusy = true;
+  addMsg(text,'user'); showTyping();
+  try {
+    const res = await fetch(API_URL, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYSTEM,messages:[{role:'user',content:text}]})});
+    const data = await res.json();
+    removeTyping();
+    addMsg(data.content?.[0]?.text || "Please contact us on WhatsApp: <a href='https://wa.me/923025074727' style='color:var(--gold)'>+92 302 507 4727</a>", 'bot');
+  } catch {
+    removeTyping();
+    addMsg("Shukriya! Abhi WhatsApp par message karen: <a href='https://wa.me/923025074727' target='_blank' style='color:var(--gold)'>+92 302 507 4727</a> 💬", 'bot');
+  }
+  isBusy = false;
+}
+function sendQ(t) { document.getElementById('chatInp').value=t; sendMsg(); }
+function openChat(t) {
+  document.getElementById('chatPopup').style.display='none';
+  document.getElementById('chatInp').value=t;
+  document.getElementById('ai-section').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>sendMsg(), 800);
+}
+
+// Auto-open chat popup after 8 seconds
+setTimeout(() => {
+  const popup = document.getElementById('chatPopup');
+  if(popup) popup.style.display = 'block';
+}, 8000);
+
+// ========== QUOTE FORM ==========
+function submitQuote() {
+  const name = document.getElementById('cName').value;
+  const phone = document.getElementById('cPhone').value;
+  const service = document.getElementById('cService').value;
+  const details = document.getElementById('cDetails').value;
+  if(!name||!service){alert('Please fill Name and Service / Naam aur service zaroor bharen!');return;}
+  const msg = `Assalam o Alaikum! 👋\n\n*New Project Inquiry — Wasti Decor Website*\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Service:* ${service}\n*Details:* ${details}\n\n---\n✅ *I understand:*\n• Design meetings: Google Meet / WhatsApp Video only\n• Face-to-face at design stage: Not available\n• Site visit (if needed): Visit fee applicable\n\nPlease get back to me. Shukriya! 🏠`;
+  window.open(`https://wa.me/923025074727?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// ========== LANG ==========
+let lang = 'en';
+function setLang(l) {
+  lang = l;
+  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  document.getElementById('btnUr').classList.toggle('active', l==='ur');
+  document.querySelectorAll('.en-t').forEach(el => el.style.display = l==='en'?'':'none');
+  document.querySelectorAll('.ur-t').forEach(el => el.style.display = l==='ur'?'':'none');
+  renderBlog();
+}
+
+// ========== NAV ==========
+window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', scrollY>60));
+function openMob(){document.getElementById('mobileMenu').classList.add('open')}
+function closeMob(){document.getElementById('mobileMenu').classList.remove('open')}
+
+// ========== CURSOR ==========
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx-6+'px';cur.style.top=my-6+'px'});
+(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx-20+'px';ring.style.top=ry-20+'px';requestAnimationFrame(animRing)})();
+document.querySelectorAll('a,button,.srv-card,.blog-card,.port-slide').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2)';ring.style.transform='scale(1.5)'});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';ring.style.transform='scale(1)'});
+});
+
+// ========== LOADER ==========
+window.addEventListener('load', ()=>setTimeout(()=>document.getElementById('loader').classList.add('hidden'),2300));
+
+// ========== REVEAL ==========
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('visible')});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// ========== COUNTERS ==========
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const obs = new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){
+      const target=+el.dataset.count, dur=2000, step=target/(dur/16);
+      let cur=0;
+      const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t);}el.textContent=Math.floor(cur)+(target>=100?'+':'');},16);
+      obs.disconnect();
+    }
+  },{threshold:.5});
+  obs.observe(el);
+});
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderBlog();
+  addMsg(`Assalam o Alaikum! 👋 I'm Wasti AI Consultant.<br><br><strong>English:</strong> Ask me about interior design, house maps, 3D visualization, pricing, or get a quote!<br><br><strong>Roman Urdu:</strong> Ghar ka design, naksha, 3D ya quote ke baare mein poochhein — main 24/7 yahan hun!`, 'bot');
+});
+</script>
+</body>
+</html>
